@@ -1,0 +1,726 @@
+{
+  "BACKUP_NOW.bat": {
+    "sha256": "ed577d529cf52ef9c92d02e5ba928fbedb3a8638a0761b72d4e69210ab95efd5",
+    "size_bytes": 646
+  },
+  "BUILD_EXE_ON_WINDOWS.bat": {
+    "sha256": "c84975da8d47ed6532f6798d15d6accea808d5dc08e95605741d327d6d3a817f",
+    "size_bytes": 1888
+  },
+  "CHECK_MYSQL_OFFLINE.bat": {
+    "sha256": "63efb8855832daac8a392613fb035d485c0735967dd753eb822a8b9880e085c1",
+    "size_bytes": 247
+  },
+  "DIAGNOSTICS.bat": {
+    "sha256": "2447418b4f4722486f04399db14b525589496f064f50837cb7539d11847c283a",
+    "size_bytes": 406
+  },
+  "FINAL_DEPLOYMENT_PREFLIGHT.json": {
+    "sha256": "f47c2659e55e3af2e65d8b597422585c4d9f398ed2f17ea1a1f0481acc037bad",
+    "size_bytes": 2867
+  },
+  "FINAL_DEPLOYMENT_PREFLIGHT_AR.txt": {
+    "sha256": "b56ce23ce069c5e530f35f3a6d4fb9ede086a81a35b781c5b53a895673ade5d4",
+    "size_bytes": 607
+  },
+  "FINAL_GATE_UNIT_TESTS.txt": {
+    "sha256": "117893560553700a442bc00ade675d24705940a61bb7b17ee9b9f4c55bebf453",
+    "size_bytes": 16391
+  },
+  "INSTALL_OFFLINE.bat": {
+    "sha256": "27c99bbf8e0fd5fbcd9eb4edbd33e3545b917c95ef016d03e8f4070c641616d3",
+    "size_bytes": 1070
+  },
+  "INTEGRITY_STATUS_V15_74.txt": {
+    "sha256": "8798ea82f51118f8c9557a5944deffdcf32c92786a541807e6d50c44175c7e70",
+    "size_bytes": 344
+  },
+  "MIGRATE_TO_MYSQL_TEST_SAFE.bat": {
+    "sha256": "5e123d04939ccab327bc3d00a970756f399f9b0b247a5f924a85dc5e28fb14cb",
+    "size_bytes": 1120
+  },
+  "MYSQL_CANDIDATE_STATIC_GATE.json": {
+    "sha256": "2a707d3b76c159dd53c573829fa5b31672ce76e837700dc5277eeca20626a59e",
+    "size_bytes": 681
+  },
+  "MYSQL_CANDIDATE_STATIC_GATE_AR.txt": {
+    "sha256": "5f7b1979bfb9927a75db7038e368daa48d6ab7fe99c452db758dfd54f0738096",
+    "size_bytes": 663
+  },
+  "MYSQL_CANDIDATE_STATIC_GATE_RUN_V15_75.txt": {
+    "sha256": "5f7b1979bfb9927a75db7038e368daa48d6ab7fe99c452db758dfd54f0738096",
+    "size_bytes": 663
+  },
+  "MYSQL_CORE_SCHEMA_V15_62_CANDIDATE.sql": {
+    "sha256": "dca39f33a83c8844904fb2959d20da2b54c75b7e3cfde181048b381d7e7c5ac4",
+    "size_bytes": 9778
+  },
+  "MYSQL_FINAL_MIGRATION_GATE.json": {
+    "sha256": "392ca29fc9920f6f9ec8ac3103428c5ec6ee6ca7022cd56911b5960b16afdd4d",
+    "size_bytes": 12900
+  },
+  "MYSQL_FINAL_MIGRATION_GATE_AR.txt": {
+    "sha256": "744e4968465711412bdfd785ad8fafc4e8353218865cc5487d6032600de6b1b2",
+    "size_bytes": 684
+  },
+  "MYSQL_MIGRATION_BLOCKER_AR.txt": {
+    "sha256": "c1522ed82c44a219ee2fa5b995f677449c0c730c708d29d0d379cb8e1cfd5e23",
+    "size_bytes": 2939
+  },
+  "MYSQL_OFFLINE_SETUP.bat": {
+    "sha256": "00f12fe27e4a3fa16273dd69012133633fd2d31dcfda1ea6e11516918d76670f",
+    "size_bytes": 895
+  },
+  "MYSQL_PRE_FINAL_INTEGRATION_AUDIT.json": {
+    "sha256": "a9236394ad2ea8a3ff346d53ce2f83e2e6a1a6ac900a29c6519dae23e31b6a95",
+    "size_bytes": 1106
+  },
+  "MYSQL_PRE_FINAL_INTEGRATION_AUDIT_AR.txt": {
+    "sha256": "a0697d7a5e771a18aa1ddda0347a12bda7c8e1315d890582b6d3f78254560b21",
+    "size_bytes": 1053
+  },
+  "MYSQL_QUERY_COMPAT_AUDIT.json": {
+    "sha256": "df5de9b1c075b90f23f713ac62ebe856ec081ec6fdd619fdb4a01de015a4b95a",
+    "size_bytes": 54624
+  },
+  "MYSQL_QUERY_COMPAT_AUDIT_AR.txt": {
+    "sha256": "7610d513d6a669c3e0788531a1ffaccdc042bee62c3de8c3df974463782dd222",
+    "size_bytes": 25878
+  },
+  "MYSQL_RUNTIME_INTEGRATION.patch": {
+    "sha256": "278fd7a283c932df27a84e340f150a05fe2342232b60e8c432b6462e59720fb8",
+    "size_bytes": 21541
+  },
+  "MYSQL_RUNTIME_PRE_FINAL_AR.txt": {
+    "sha256": "1e6f0538303c313a917d64b64943ee8e9e896e5fac1605a38d491d7b811209cc",
+    "size_bytes": 4074
+  },
+  "MYSQL_SAFE_MIGRATION_INSTRUCTIONS_AR.txt": {
+    "sha256": "251792f891ab872da6b37829e814cf3c7d61676739b3ddd04160486b9a01a666",
+    "size_bytes": 2664
+  },
+  "MYSQL_TEST_DATABASE_SETUP.sql": {
+    "sha256": "e9f86fd26cefb2d8ea8ed3b4f1efc77f7a5f06cdce0461c807aa60e27e776964",
+    "size_bytes": 553
+  },
+  "PACKAGE_CONTENTS_SHA256.txt": {
+    "sha256": "8ed897c1171a1be712ad67eb960db8a030d863dbdb2a5a799f1a6cfe5d10a749",
+    "size_bytes": 9274
+  },
+  "PREFLIGHT_MYSQL_TEST_SAFE.bat": {
+    "sha256": "2082c580f38714e1f1bb5574a426bfab6d6d0f216684490854a5426fa825ffdb",
+    "size_bytes": 501
+  },
+  "PREFLIGHT_RUN_V15_75.txt": {
+    "sha256": "9a627a3a88ce12b856951274ae61de226c7376d6e3d163f63cdf2690ea2154da",
+    "size_bytes": 19829
+  },
+  "PRE_FINAL_STATUS_V15_75_AR.txt": {
+    "sha256": "a93d625fa7e02ff87b8ce47583d9375bf919642e58e4a716b6384e9c06e4f6b6",
+    "size_bytes": 2251
+  },
+  "PYTHON_COMPILE_RESULTS_V15_74.txt": {
+    "sha256": "6da08c69e7d74848102248f73b71024220f88374e7d709cfa95a2d001099a8d8",
+    "size_bytes": 44
+  },
+  "PYTHON_COMPILE_V15_75.txt": {
+    "sha256": "ac8e693c2105eb3e80768a87f9431d9f9f4ed309a778ac495488034cd1105807",
+    "size_bytes": 19090
+  },
+  "README_AR.txt": {
+    "sha256": "ae7098ae5abbf5752788f98a486ff9b07b23f44f56c307072a8b54e0a8119e1e",
+    "size_bytes": 3975
+  },
+  "README_LMSTUDIO_CENTRAL_AR.txt": {
+    "sha256": "d284cd0d7d8e204f9afe3386cf91fcc772cce3f42eca9c23997078c4ca37f505",
+    "size_bytes": 1770
+  },
+  "README_MYSQL_OFFLINE_AR.txt": {
+    "sha256": "b7511bda098778b9be718a6366284a5f9fe09664d20141f578e52ac0422644ec",
+    "size_bytes": 3845
+  },
+  "README_SERVER_FIX_AR.txt": {
+    "sha256": "0ce937a4b3bb808edf49fc0609d0db2ae1f889c248d78e4e1cf9b8475e67e6c3",
+    "size_bytes": 524
+  },
+  "README_V10_AR.txt": {
+    "sha256": "5e17336f0783f1b0d7996539db67c1392b3d3437474e0ee1c614131d899cd91c",
+    "size_bytes": 2383
+  },
+  "README_V11_AR.txt": {
+    "sha256": "afd617ca5f2662dd2d0119a55ceb2137e42261faea1f799f5dabbe281c1d111f",
+    "size_bytes": 1971
+  },
+  "README_V12_SCAN_OPTIONS_AR.txt": {
+    "sha256": "e6fe9a2e03c96f6a0d9770ba4c9753da0313c0e465a8e0e80274ca6e947df9d2",
+    "size_bytes": 2377
+  },
+  "README_V13_PREVIEW_AI_DIAGNOSTICS_AR.txt": {
+    "sha256": "31755b75ba7a7bb819e1ced1abfe30c267c8e8a389d78fda6f69d986f0769d9b",
+    "size_bytes": 2920
+  },
+  "README_V14_TOOLS_LIBRARY_AR.txt": {
+    "sha256": "facf75630123c89397f35ccf3f84d131a8288e21af3cff0cd4d791c1a3d33c30",
+    "size_bytes": 10486
+  },
+  "README_V15_10_AI_FIELDS_AUTOFILL_AR.txt": {
+    "sha256": "0cbecdbab6ac5bd5dcd45c816cbf771e4f20dcce466482bed26ef8dd40b8b990",
+    "size_bytes": 2050
+  },
+  "README_V15_11_CONVERT_FORMATS_AR.txt": {
+    "sha256": "fcf79bb7fe2e5425db63133d75ece8c734be9868f9062384cec13af7d490bcc2",
+    "size_bytes": 741
+  },
+  "README_V15_12_CASE_BASKET_PREVIEW_AR.txt": {
+    "sha256": "813ed48d7de2bf0068f6582ae703a90777c2e1db81e79c058a9cd5f655b29beb",
+    "size_bytes": 906
+  },
+  "README_V15_13_1_SQLITE_DEFAULT_FIX_AR.txt": {
+    "sha256": "972ac6149eb0864622510bc4f3cc465b749e8e809cd4d07ab368c301d8962c07",
+    "size_bytes": 1067
+  },
+  "README_V15_13_SCAN_BATCH_GROUP_CONTEXT_AR.txt": {
+    "sha256": "3add39be387b79cf7a95c26fb84d23d8a626e17d2d579d3b647d08bcaa774977",
+    "size_bytes": 1962
+  },
+  "README_V15_14_UNIFIED_AR.txt": {
+    "sha256": "37507b0736a3c8f4d6c2a0ce0189c5befaa7f5cd129b055a45a55c7675e390b9",
+    "size_bytes": 2857
+  },
+  "README_V15_15_AI_ENTITY_FIELD_ACCURACY_AR.txt": {
+    "sha256": "f96ef6fc7cd15a26325be1dbd92c9a8796e607fd170d418798cdce62a449c972",
+    "size_bytes": 1829
+  },
+  "README_V15_16_1_DATE_SINGLE_FIELD_AR.txt": {
+    "sha256": "6101d348afe16947c97f61514f9e02b2258fd3e4b4062c27e169416a092abe21",
+    "size_bytes": 845
+  },
+  "README_V15_16_AUTOCOMPLETE_DATE_AR.txt": {
+    "sha256": "01cb730e2c457eb943801bd8b06a4c985cd6fce5d59b85179baa3ae38c721758",
+    "size_bytes": 1732
+  },
+  "README_V15_17_SMART_FIELD_EXTRACTION_AR.txt": {
+    "sha256": "8e741fbef40ecb0f69628ab032d2932fa486ffb38446decc1dc95b4f71b9eac8",
+    "size_bytes": 2333
+  },
+  "README_V15_18_FIELD_IMPORT_PROGRESS_ADDRESS_AR.txt": {
+    "sha256": "c4b0289bce1aecedde72d55b587006dc8e2ffe6cb28ced33e51e9e46ca7e794e",
+    "size_bytes": 2123
+  },
+  "README_V15_19_DATE_AUTOFORMAT_AR.txt": {
+    "sha256": "ade2adf73d105fb8cb0ae7318581f3b9435c7236dc108db4aa45bd7addad0e27",
+    "size_bytes": 1353
+  },
+  "README_V15_1_COMPLETE_FIX_AR.txt": {
+    "sha256": "036ce748e2fdfd36b20dfa29314d90ab29391f3daafcf77270e4dde61d95dab3",
+    "size_bytes": 1526
+  },
+  "README_V15_1_FIX_AR.txt": {
+    "sha256": "495cde09fc94a25a51428656f4d8bd2290101d80eda8c9df249547f0aece02a4",
+    "size_bytes": 1024
+  },
+  "README_V15_20_DATE_TAB_PARTIAL_ENTRY_AR.txt": {
+    "sha256": "b832b2e4c166757b4e5a82c9e1f1f34fb26b0cb8dffe5c5a15c5b427e846b466",
+    "size_bytes": 893
+  },
+  "README_V15_21_BASKET_THUMBNAILS_AR.txt": {
+    "sha256": "811fd70e254b2f96032e6be2bf22db4b9e2a6267f5503ba8e2ca0bfc2cc7fe84",
+    "size_bytes": 1293
+  },
+  "README_V15_22_CLEAR_BATCH_IMPORT_OPTION_AR.txt": {
+    "sha256": "4e13e6313f77c8c04a7e7d0156f4e802db72807ed0b8808b472e2c4dc533e74e",
+    "size_bytes": 1173
+  },
+  "README_V15_23_BATCH_FIX.txt": {
+    "sha256": "d4f5c7494a5561664319bae5520d0606ca0da292064377c106e93264d1457ec5",
+    "size_bytes": 1108
+  },
+  "README_V15_24_IMPORT_REVIEW_FIX.txt": {
+    "sha256": "6d582547fc6df9a558a645f813efe31ec511861668fc8cff91f8f882af1734f5",
+    "size_bytes": 1003
+  },
+  "README_V15_25_PROCESSING_INDICATOR.txt": {
+    "sha256": "2a8db7de55246e9204b583f893a8b44d43472194fcd63fbed98f962d8a07f048",
+    "size_bytes": 613
+  },
+  "README_V15_26_ARABIC_BOOK_NUMBER_FIX.txt": {
+    "sha256": "410d8f8e16cca8ee479f47478455d471025083636572b4c703e8b625fbcb58c7",
+    "size_bytes": 711
+  },
+  "README_V15_27_ARABIC_NUMBER_NAMES_FIX.txt": {
+    "sha256": "b1b761d0f3470de4fb25f5bcdbdc34f20b4917bd43c1cae227b7141b10cb2b79",
+    "size_bytes": 1378
+  },
+  "README_V15_28_DATE_SEGMENTS_TAB_AR.txt": {
+    "sha256": "39c1f9294e3f8d343e47fda061e5eec251b97855a1d6d9107146d5b54945c2f9",
+    "size_bytes": 714
+  },
+  "README_V15_29_NAME_SEPARATOR_DATE_FIX_AR.txt": {
+    "sha256": "ea98c3dcb507f5ea5a74fef4bd91e889c19443da6756eabd6ae7711da085215b",
+    "size_bytes": 566
+  },
+  "README_V15_2_TRANSACTION_EDIT_AR.txt": {
+    "sha256": "a0c848bf2656171d64f723d8c34b6641a49aefa98c9b3d978bfc75d9859d27a2",
+    "size_bytes": 1161
+  },
+  "README_V15_30_DATE_NAMES_ATTACHMENTS_FIX_AR.txt": {
+    "sha256": "51c526443214cd0eb329cdb0704d86308f4e13755350214317f132e8fe72c6bc",
+    "size_bytes": 2482
+  },
+  "README_V15_31_IMPORT_HANG_FIX_AR.txt": {
+    "sha256": "22e5daa1fa75d927b361ab7e3c6c4138be76cf6c31be2f2eb6c7749a1acbc1f9",
+    "size_bytes": 1599
+  },
+  "README_V15_33_SQLITE_DATE_IMPORT_FIX_AR.txt": {
+    "sha256": "0e608032eb042e74e19a098ae343b187db407c1f2eb8ceddab8f7c06210b5964",
+    "size_bytes": 1756
+  },
+  "README_V15_34_ARCHIVE_DELETE_RESTORE_AR.txt": {
+    "sha256": "e9d40336bff66a134fdb48d11db142f3c484a041488114e942ff65bda4e76430",
+    "size_bytes": 1776
+  },
+  "README_V15_35_DATE_TAB_FIX_AR.txt": {
+    "sha256": "eff4a1c6f7c421f417bb3dcc4accceee8c02523483c8a19fcdd09bba190ce407",
+    "size_bytes": 1527
+  },
+  "README_V15_36_DATE_CALENDAR_PREVIEW_COUNTER_FIX_AR.txt": {
+    "sha256": "d4529756085852ae96b63b91b7614729d6f35b00f8778abf15d7e6261aaf20b2",
+    "size_bytes": 1029
+  },
+  "README_V15_37_INVESTIGATIVE_COUNCILS_LEGAL_BASKETS_AR.txt": {
+    "sha256": "da34136462a6bcdf217310b46a8930f31cfbf11c7bd02888fc6359394806c3cd",
+    "size_bytes": 2101
+  },
+  "README_V15_38_COMPACT_SCANNER_SETTINGS_AR.txt": {
+    "sha256": "d973f7e11104d5baa5af7ee2088c5cdba0c62404bcd2e4c601ed259327286f7c",
+    "size_bytes": 1627
+  },
+  "README_V15_39_DATE_AND_FIELD_LAYOUT_FIX_AR.txt": {
+    "sha256": "98cbe0ad3be0f2a0b17b0a69111e207850453e2a5f85be7b409d3e58d550f34e",
+    "size_bytes": 1485
+  },
+  "README_V15_40_SCANNER_DATE_LAYOUT_FIX_AR.txt": {
+    "sha256": "4cb7fc9a779aee52fe4edeea583e2a6b49f0e451f540233be88b8001ab884de8",
+    "size_bytes": 1625
+  },
+  "README_V15_41_COLLAPSIBLE_SCAN_SETTINGS_AR.txt": {
+    "sha256": "139424a0c9a77c2b71d5e72948b006491bc2ea4be78bceebcb690f2319237fa4",
+    "size_bytes": 1107
+  },
+  "README_V15_42_DATE_DEFAULT_AUTOFIX_AR.txt": {
+    "sha256": "a5e650d9486955d71872acfe4c02616211108033c12b75a15483f61eea1ba3a0",
+    "size_bytes": 1307
+  },
+  "README_V15_43_COMPACT_CASES_AR.txt": {
+    "sha256": "6ae65c6315f868520d09ff7193af6d295226c21d51081b868ac70c7a24b7a355",
+    "size_bytes": 1369
+  },
+  "README_V15_44_COUNCIL_INDEPENDENT_STORAGE_AR.txt": {
+    "sha256": "eb12a0ddbd975cd06921e6284a62f6abf8a2290e9427627dcdae00ad64d2fb26",
+    "size_bytes": 2056
+  },
+  "README_V15_45_COUNCIL_DELETE_SAFE_MIGRATION_AR.txt": {
+    "sha256": "ea712d81183b1a1305de162df5ecf11db8b594a76bdbd9f1a3a17dc9ba06e3b4",
+    "size_bytes": 1152
+  },
+  "README_V15_46_LOGIN_RESET_SAFE_AR.txt": {
+    "sha256": "d3cf7e0fb8973b35d0f79fabed960d20599af30628aeaa7a89c56194d51c8df6",
+    "size_bytes": 1319
+  },
+  "README_V15_47_SALAH_LOGIN_DESIGN_AR.txt": {
+    "sha256": "60de4c44062de87989ac4ee28b81cbe5a5b1138b000aa9c0fff1c577bedbc2c6",
+    "size_bytes": 1074
+  },
+  "README_V15_49_DIRECTORATE_MYSQL_INDEX_AR.txt": {
+    "sha256": "af7faf84eb32302d18955322ca6cef7fd04d3ea143d490f1c47ce7d65d7c78c0",
+    "size_bytes": 2160
+  },
+  "README_V15_49_SECURE_OFFLINE_AR.txt": {
+    "sha256": "af7faf84eb32302d18955322ca6cef7fd04d3ea143d490f1c47ce7d65d7c78c0",
+    "size_bytes": 2160
+  },
+  "README_V15_4_FIXED_AR.txt": {
+    "sha256": "df221069b18a461c0dc76192c99b0f0822c66d63cc0f0338c2cc76a24a1e5713",
+    "size_bytes": 3077
+  },
+  "README_V15_53_2_MYSQL_GUARD_AR.txt": {
+    "sha256": "d670985ef9c263891a159e134cea18f227b76e8ac701ed6725417a296d65d700",
+    "size_bytes": 988
+  },
+  "README_V15_53_MIGRATION_SAFETY_AR.txt": {
+    "sha256": "b9509af984624d3a759115776beec8ad3bdd1ae3314170b4b175ed657087063a",
+    "size_bytes": 1029
+  },
+  "README_V15_5_CASE_BASKET_LINK_AR.txt": {
+    "sha256": "442bcc0dadfd0ddecdd1e449138bb295abdc3f9f2aff75da5a1e3c65cb32566b",
+    "size_bytes": 1041
+  },
+  "README_V15_6_ARCHIVE_BOOKS_SECTION_AR.txt": {
+    "sha256": "6618578074f0b213f53fb1cec13c0a5cb428a90dea0719807208eb8a23730a09",
+    "size_bytes": 1280
+  },
+  "README_V15_7_SCAN_TO_ARCHIVE_FLOW_AR.txt": {
+    "sha256": "c464e71674d13eaeba34e6322e65ee3d3103a6e0bd390503adbdf567762a5a20",
+    "size_bytes": 1956
+  },
+  "README_V15_8_MANUAL_INDEX_PREVIEW_FIX_AR.txt": {
+    "sha256": "1af2fe4498b233ac8711933de1325c079d93cb5fed8915c948081af9dc3a8326",
+    "size_bytes": 1634
+  },
+  "README_V15_CASES_BASKETS_AR.txt": {
+    "sha256": "804fcedbdc8c23a1b5f30b6e93fdeaaec9b2b594992a32333f8834359ba7b3d8",
+    "size_bytes": 1817
+  },
+  "README_V6_OCR_AR.txt": {
+    "sha256": "6531a374d9d2beced1ac3d5e0da29903fa8c90f4294dcfe236c93ab1b8e2b983",
+    "size_bytes": 2457
+  },
+  "README_V7_FIELDS_AR.txt": {
+    "sha256": "36795a23609ef75377395624cd5524506dccb9d23d4ccbc9e6e4b4cf96d26e3e",
+    "size_bytes": 1176
+  },
+  "README_V8_AR.txt": {
+    "sha256": "779634c7c359eef73b04240daf14a53a7ec2f03dadf909cdb302b035ecc4b220",
+    "size_bytes": 3416
+  },
+  "README_V9_AR.txt": {
+    "sha256": "4624410805f999740bf7f4b98e18e4ca163e3ccd5ee45e23a436662dbb0c9914",
+    "size_bytes": 3036
+  },
+  "RELEASE_READINESS_AUDIT_V15_53_3_AR.txt": {
+    "sha256": "560c3f87754e7dcb3124b76fe825350aae85e80b573ef8977076be0793a900bd",
+    "size_bytes": 3055
+  },
+  "RELEASE_READINESS_RESULTS_AR.txt": {
+    "sha256": "cd5ffb0af6ec1d63f463eaba881ad9499f1fe87a8042b9fd8049be8260a5aa13",
+    "size_bytes": 520
+  },
+  "RELEASE_STATUS_AR.txt": {
+    "sha256": "46859e22a208b759c3181801620af925cd32a3f9af7e50771450405aed3809bb",
+    "size_bytes": 3323
+  },
+  "RESET_ADMIN_PASSWORD.bat": {
+    "sha256": "a8c491be0ad0734391b8ac4b773d5cf624a4e0f41350e842f285b46579bae05e",
+    "size_bytes": 655
+  },
+  "SAFE_MIGRATE_MYSQL_TEST.bat": {
+    "sha256": "bc710fc756184a50371c406f59ca926f1b65d1b09c58eb5674f8138a1c05169a",
+    "size_bytes": 584
+  },
+  "SETUP_BRANDED_LOCAL_ADDRESS_ADMIN.bat": {
+    "sha256": "026c28254b9007e15a259c78f593b6409b1f241c6b6e6ed3a7efb1a7b71d9dfa",
+    "size_bytes": 836
+  },
+  "SHA256_MANIFEST_V15_74.json": {
+    "sha256": "93df437624f5921ce3d8a868750086dc6f8d4f1465a31d6dc4972312ce2dc6aa",
+    "size_bytes": 18089
+  },
+  "SQLITE_SMOKE_AND_DRYRUN_V15_74.txt": {
+    "sha256": "1cd669f6aba406525245aff0390e9edad01119c8480f1887b8f3a1d00cfac9ac",
+    "size_bytes": 950
+  },
+  "START_HERE.bat": {
+    "sha256": "97d339d02a90d5515ab02e6d38f20125322bf0be6c775d29d1850e46b2acea15",
+    "size_bytes": 1464
+  },
+  "STATUS_V15_53_AR.txt": {
+    "sha256": "1bb5037e7c47215d44356d7d99f1c99ac041cc3128ea14eaf3e5259114456583",
+    "size_bytes": 1444
+  },
+  "TEST_RESULTS_V15_53_1_AR.txt": {
+    "sha256": "7cb730c39e075cbc4f37838c89db172fcc8f9ff409078832bbf7a5a431eec235",
+    "size_bytes": 1028
+  },
+  "TEST_RESULTS_V15_53_2_AR.txt": {
+    "sha256": "3185acba157d6e096efb839f5f935633a82d4b239e218c17d521cce4e27b06c2",
+    "size_bytes": 1233
+  },
+  "TEST_RESULTS_V15_74.txt": {
+    "sha256": "30213d8e886c288f8dfd719c6da752ca6c90052fb903ae839d0143fcba95c77f",
+    "size_bytes": 15209
+  },
+  "TEST_RESULTS_V15_75.txt": {
+    "sha256": "f0c0e328032ad730897419418048c175c055f390f1e9631e765bec67c335bd91",
+    "size_bytes": 16391
+  },
+  "TEST_SUMMARY_V15_75.json": {
+    "sha256": "e7c58d5b0f75fd4894409c081459520d98ae2014d6ef796f9a6ff1a9e3e134db",
+    "size_bytes": 252
+  },
+  "ai_index_learning.json": {
+    "sha256": "7a8a1eaeb105c9651db5fe3f4ccc1f406358a982415d3da90cd7c037192e2e05",
+    "size_bytes": 1194
+  },
+  "archive_repository.py": {
+    "sha256": "ae0e3961cea4cb86909cc4242cbfb0fd1032854478fe0590c189a4014cfecd24",
+    "size_bytes": 1661
+  },
+  "backup_restore.py": {
+    "sha256": "5f9a79ae7e5bba23ef80d22ef482979bc97e987cfed1d37774cd197ea849380e",
+    "size_bytes": 3039
+  },
+  "brand_logo.png": {
+    "sha256": "80c427182368831e343c816a999bba5a2c9651e95919e336a548a09812458a68",
+    "size_bytes": 167210
+  },
+  "diagnostics.py": {
+    "sha256": "4f29808d47aca2746e7d52e9795f8cf6b230b899515001fbe7c7e9cdef507833",
+    "size_bytes": 2631
+  },
+  "document_tools.py": {
+    "sha256": "7f4200f378d1800ae5a0214d7147d6ef848eff7cf85a348ad9fe2a9b3fc6e164",
+    "size_bytes": 13743
+  },
+  "install_dependencies.bat": {
+    "sha256": "09cfe16b5f23901717c630ed5f557dd7c253863234978668de33c64a83075921",
+    "size_bytes": 521
+  },
+  "integrity_guard.py": {
+    "sha256": "c2e9752a2e45a0a915523634c8a3f424b898f8c3b4e5712a91bb0479c8d0cd53",
+    "size_bytes": 2095
+  },
+  "integrity_manifest.json": {
+    "sha256": "7caeed9c1514f2e52d77a8d0a66f31f50b922dea73a3e24a5886fec16ce3fb45",
+    "size_bytes": 8810
+  },
+  "integrity_manifest.sig": {
+    "sha256": "7b6fd79e42cb9803d72d9d5f01699a292cc446d77679ea691bc6e9a90f3c76a4",
+    "size_bytes": 345
+  },
+  "license_core.py": {
+    "sha256": "76a9eb92bedc3f33c50f96fe979503caabe21c6e2e195668b48c403ea9742c41",
+    "size_bytes": 3307
+  },
+  "lmstudio_config.json": {
+    "sha256": "26ebd9177c52ef1e7a7954432ce57f5011b1ac934c352e3bb81e5078e0cc4abe",
+    "size_bytes": 288
+  },
+  "main.py": {
+    "sha256": "8848820aac23116e1a5b5022ddd0f5bfe5d96e8c4f9a73827a2b902290487f29",
+    "size_bytes": 286163
+  },
+  "main_mysql_candidate.py": {
+    "sha256": "819a4915d430e1f7b1aa1a5e6c2bc1b7a5cc208eddfb677350ca216dfe11a2ac",
+    "size_bytes": 285157
+  },
+  "migrate_mysql_dry_run.bat": {
+    "sha256": "7b7c76dcf6ce2b4e50cb85972051b0ca57987ac97fd86118527e74290ce93569",
+    "size_bytes": 68
+  },
+  "migrate_mysql_execute.bat": {
+    "sha256": "9b97277f323ca7a618640503a1d735ddc5de2fbb7090d20f6f3e3196ce088625",
+    "size_bytes": 418
+  },
+  "migrate_sqlite_to_mysql.py": {
+    "sha256": "1414f1d2223e678afe93bdb0e24d1987a30bc2e0ce82ff9825b4921b00b84f0f",
+    "size_bytes": 8205
+  },
+  "migration_path_map.py": {
+    "sha256": "fe0accf149074f79ee4f44e3ce0a1cfcc8024f73d1157261829d1676fdcea714",
+    "size_bytes": 3935
+  },
+  "mysql_candidate_gate.py": {
+    "sha256": "81eef2cb5d2fea9624215e590c662fe0a517036d97774d834df76e8c94fc13bd",
+    "size_bytes": 3126
+  },
+  "mysql_config.sample.json": {
+    "sha256": "36e7115a17eae66bbce74432dba71c8afccbc9056d7e4eff665340c3406ef46d",
+    "size_bytes": 108
+  },
+  "mysql_deployment_preflight.py": {
+    "sha256": "16585034d7835140eb4cabb1169689e143472e6761024024ee2c711efd0716fd",
+    "size_bytes": 4291
+  },
+  "mysql_index_sync.py": {
+    "sha256": "65174e840a759e80e38b00a58682ccb15f8b32b539d98b4d2e0f6417e23034e0",
+    "size_bytes": 5553
+  },
+  "mysql_main_static_audit.py": {
+    "sha256": "b204f4d2ff40934135d4a976d052eeaf814097e03758532777d33fa2ed3094da",
+    "size_bytes": 3773
+  },
+  "mysql_migration_gate.py": {
+    "sha256": "573000f2294447ed440ec96df2825c7f470db37a51c02c2fe6664effc674d875",
+    "size_bytes": 7810
+  },
+  "mysql_pre_final_audit.py": {
+    "sha256": "c0666519cdb42b371003625dbfb9446e6e050ba4aecc0a2645ca974a6ac1a179",
+    "size_bytes": 3865
+  },
+  "mysql_query_compat_audit.py": {
+    "sha256": "24724dc2ed17af86a9f5743633f6e8851262614a9e8ec14b810014061d0f3e36",
+    "size_bytes": 4559
+  },
+  "mysql_repository.py": {
+    "sha256": "f34135ac41c07f6ff7babefd105337c8e53ebe73b794c499cb09fa978fa4e758",
+    "size_bytes": 4613
+  },
+  "mysql_runtime_adapter.py": {
+    "sha256": "26e75b46c79d42b55095cb939c40743d0da18f024d9f9628f364a658b07f4c60",
+    "size_bytes": 6155
+  },
+  "mysql_runtime_compat_audit.py": {
+    "sha256": "3830eeb1380eb47d9d7c29371e7926c700a1e19d2d37abfc3508b1b3f815125a",
+    "size_bytes": 2577
+  },
+  "mysql_safety.py": {
+    "sha256": "e3492bc3aa8a8f6e7027dcb829025a050e2da3cfea5a8eaffbe8ef4c24e714fe",
+    "size_bytes": 911
+  },
+  "mysql_schema_manager.py": {
+    "sha256": "85c8acaea73ba48e4ca009c7cc00a6bed2a5cb26b6692734430b9d05ad928405",
+    "size_bytes": 6592
+  },
+  "mysql_secure_config.py": {
+    "sha256": "8b96e29ebb38b3724eafb06be1dcd0a464031b1e6c25d0be4700effdeae6eb39",
+    "size_bytes": 3594
+  },
+  "mysql_sql_compat.py": {
+    "sha256": "c13127a7a3957112e76927238f6e61864de1a06e273e31b0d56a16bdfd6a9a0a",
+    "size_bytes": 6341
+  },
+  "offline_packages/PUT_MYSQL_8_4_13_X64_MSI_HERE.txt": {
+    "sha256": "57841d87f6bdd0d9d2abaad197065f87ac3311e6f7d485529cfb05dbb76a54a4",
+    "size_bytes": 540
+  },
+  "offline_packages/PUT_OFFLINE_WHEELS_HERE.txt": {
+    "sha256": "4be6527f8f7ef14b175d53db0e13f9a4254d718b517eb73a6d96061229729a57",
+    "size_bytes": 279
+  },
+  "release_readiness_check.py": {
+    "sha256": "2630e058ffd680b3f5ca133eb0602e5050c3976ae1205986016ae5b030d8d745",
+    "size_bytes": 1762
+  },
+  "repository_contract.py": {
+    "sha256": "e2aca6132701595bcf76a34310a2e5a0e5025d5bd8b6ca450d455168e57f37a1",
+    "size_bytes": 937
+  },
+  "requirements.txt": {
+    "sha256": "1fdb16ae73ea2cba11e8ad29b87e9c11677e936d463467df9fde11a5ba580e21",
+    "size_bytes": 208
+  },
+  "reset_admin_password.py": {
+    "sha256": "f40b694d8959f45a6c610c9db828efd94362055325d4658f14bee32c0cf350e2",
+    "size_bytes": 3832
+  },
+  "reset_test_database.bat": {
+    "sha256": "b61e51f311bee9af1c64a03746856678747d2e8b71b8c2673ea112245d51a5d3",
+    "size_bytes": 1834
+  },
+  "run_local_archive.bat": {
+    "sha256": "02d3e8833b76ca1b68fe14e534fff66faecf0a2fa623ddf5508aa98970b48bbf",
+    "size_bytes": 352
+  },
+  "run_local_archive_network.bat": {
+    "sha256": "88ceed37fcd95fa38365cf992cc0c67063a027e0cf9d89b119d009beed0b5073",
+    "size_bytes": 441
+  },
+  "safe_migrate_sqlite_to_mysql.py": {
+    "sha256": "22ed928057f42af93187c6579f6ff4deda90c3de53e98324357e5844c929b982",
+    "size_bytes": 13434
+  },
+  "safe_migrate_to_candidate.py": {
+    "sha256": "bca52d3a6df3b8510270d5d4e650b1543bf19f7fae66e348477e43d45cfc34b7",
+    "size_bytes": 11801
+  },
+  "scanner_wia.py": {
+    "sha256": "2d9999aede3ac74e2ba7a6d0abf4771eaa9a9384c50fcff1e622af425e99a26c",
+    "size_bytes": 6425
+  },
+  "test_archive_repository.py": {
+    "sha256": "c7be0c4301bce51b0339854073a1ff38a0049fad7914aea1831f43e2a282e2c3",
+    "size_bytes": 2099
+  },
+  "test_main_mysql_runtime_integration.py": {
+    "sha256": "5094e2716a3f00ecb1a16a0447c229995a26c1a601b4e2e05999ea64033a12c4",
+    "size_bytes": 1976
+  },
+  "test_migration_path_map.py": {
+    "sha256": "c63aca1e5ca7b2a91d8a0efc4fea86b3709741afc8cb3a4df803477aa7879f68",
+    "size_bytes": 938
+  },
+  "test_migration_safety.py": {
+    "sha256": "5cff4f677eef204f32cc67817ffc2b55287f9eee6c3afdfb05fa139193be47ef",
+    "size_bytes": 5534
+  },
+  "test_migration_safety_results.txt": {
+    "sha256": "f27d80a214879967b6a0a26a0fa45502cb064ff24163c506d06305afbdda62a3",
+    "size_bytes": 453
+  },
+  "test_mysql_candidate_gate.py": {
+    "sha256": "136247370a112e67628ee2a278f2be93e178c1c4747026eb9424c43c3bdc5b53",
+    "size_bytes": 519
+  },
+  "test_mysql_main_static_audit.py": {
+    "sha256": "6d5bad64b44d22b4a265e9ac8313e0775cf9118e0b43cf45f1fc474dd93692fb",
+    "size_bytes": 1064
+  },
+  "test_mysql_migration_gate.py": {
+    "sha256": "c34947c7090d66f1538842131f793c13da900d7186b3741d5891f6a65cee33ac",
+    "size_bytes": 2276
+  },
+  "test_mysql_migration_readiness.py": {
+    "sha256": "7d0548efe2d0c5edcc3f523a913350b4747e6a0dc110ea9b98ce2caba4d3a73c",
+    "size_bytes": 1732
+  },
+  "test_mysql_pre_final_audit.py": {
+    "sha256": "f11401ba1f1a8489580ec0d61c8fbef280919fd1b0edf21e8b23d2e0d624480d",
+    "size_bytes": 1258
+  },
+  "test_mysql_query_compat_audit.py": {
+    "sha256": "287186f2e9d1f3d27b2084040d5d5e164309dfb02a5cd5cd51ad6eac8f46c3fa",
+    "size_bytes": 1317
+  },
+  "test_mysql_repository.py": {
+    "sha256": "ff4ef6008a2f4922750075f8286ad375da12eef0a10af9cea0ee6b6bbe75d887",
+    "size_bytes": 6033
+  },
+  "test_mysql_runtime_adapter.py": {
+    "sha256": "12022ff9a9d3dca20def9f67d94c975cbfa1aea793c0e189da3898d651eb52b2",
+    "size_bytes": 4639
+  },
+  "test_mysql_runtime_compat_audit.py": {
+    "sha256": "16fc7d8bc5846522ce6d3e0724f32b789a664437a7e24b51cbe0c614305c1ecb",
+    "size_bytes": 1006
+  },
+  "test_mysql_safety.py": {
+    "sha256": "43f5350ac3616ce1940125c9859179737790b87172de5fc9109024c3aa91a692",
+    "size_bytes": 1217
+  },
+  "test_mysql_safety_results.txt": {
+    "sha256": "e5ad9f782cd274e20ae5b2a1c1d55f76e08b1744f9375e6cccfb3bc70d635871",
+    "size_bytes": 265
+  },
+  "test_mysql_schema_manager.py": {
+    "sha256": "983e1a3b7d9273f887c70ba6877899b4d82eb2c5ea423b44c15210d755344a96",
+    "size_bytes": 6692
+  },
+  "test_mysql_schema_review.py": {
+    "sha256": "99be93800f7e2f7b9c2925bd439e467047905cb64b6e0273a3d8d1177f2f5dbb",
+    "size_bytes": 1859
+  },
+  "test_mysql_secure_config.py": {
+    "sha256": "799f82910e260baa875e56346305e199498fd678b6bef51e2e76fa7a05bac6ed",
+    "size_bytes": 2481
+  },
+  "test_mysql_sql_compat.py": {
+    "sha256": "771f2242e87888aff8c9678525652240ad5bbc2141f421dabc90fddc2c3cca2f",
+    "size_bytes": 3177
+  },
+  "test_mysql_sql_inventory.py": {
+    "sha256": "3c47acca47aeede403f43a0cb50e1b2c72c90925018646f139ccc74f840d9192",
+    "size_bytes": 802
+  },
+  "test_repository_contract.py": {
+    "sha256": "67aea1febbb88102c9eef427b1b891e56aacc43ca527ec9b26d8f92115aeed79",
+    "size_bytes": 1476
+  },
+  "test_safe_migrate_to_candidate.py": {
+    "sha256": "7ca9c5ee9d37be835a95b3c57f3ba2f843cc7b9dd1a3a7609c808c62a4de553f",
+    "size_bytes": 4457
+  },
+  "verify_python_compile.py": {
+    "sha256": "b3285de4024d66ce8ee32eeff699d6cabbee3e4b164880ac4cb55ff103189252",
+    "size_bytes": 455
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "active_profile": "local",
+  "profiles": {
+    "local": {
+      "host": "127.0.0.1",
+      "port": 3306,
+      "database": "salah_archive_test",
+      "user": "archive_test_app"
+    },
+    "server": {
+      "host": "127.0.0.1",
+      "port": 3306,
+      "database": "salah_archive_test",
+      "user": "archive_test_app"
+    }
+  }
+}

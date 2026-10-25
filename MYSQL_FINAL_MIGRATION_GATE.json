@@ -1,0 +1,405 @@
+{
+  "status": "BLOCKED",
+  "scope": "Static-only check; no database opened and no schema applied.",
+  "sqlite_schema_tables": 16,
+  "mysql_candidate_tables": 16,
+  "missing_tables": [],
+  "extra_mysql_tables": [],
+  "missing_columns": {},
+  "sqlite_marker_counts": {
+    "sqlite_connect": 1,
+    "pragma": 6,
+    "executescript": 1,
+    "insert_or_ignore": 11,
+    "insert_or_replace": 1,
+    "lastrowid": 11,
+    "datetime_now": 14,
+    "table_info": 1,
+    "autoincrement": 15
+  },
+  "marker_line_count": 53,
+  "marker_lines": [
+    {
+      "line": 42,
+      "markers": [
+        "pragma"
+      ],
+      "source": "PRAGMA foreign_keys=ON;"
+    },
+    {
+      "line": 44,
+      "markers": [
+        "datetime_now",
+        "autoincrement"
+      ],
+      "source": "id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL UNIQUE, description TEXT DEFAULT '', created_at TEXT NOT NULL DEFAULT (datetime('now'))"
+    },
+    {
+      "line": 47,
+      "markers": [
+        "autoincrement"
+      ],
+      "source": "id INTEGER PRIMARY KEY AUTOINCREMENT, cabinet_id INTEGER NOT NULL, doc_type TEXT NOT NULL DEFAULT 'other',"
+    },
+    {
+      "line": 51,
+      "markers": [
+        "datetime_now"
+      ],
+      "source": "created_by TEXT NOT NULL DEFAULT 'admin', created_at TEXT NOT NULL DEFAULT (datetime('now')), updated_at TEXT NOT NULL DEFAULT (datetime('now')),"
+    },
+    {
+      "line": 55,
+      "markers": [
+        "autoincrement"
+      ],
+      "source": "id INTEGER PRIMARY KEY AUTOINCREMENT, document_id INTEGER NOT NULL, field_name TEXT NOT NULL, field_value TEXT DEFAULT '',"
+    },
+    {
+      "line": 59,
+      "markers": [
+        "autoincrement"
+      ],
+      "source": "id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL UNIQUE, password_salt TEXT NOT NULL, password_hash TEXT NOT NULL,"
+    },
+    {
+      "line": 61,
+      "markers": [
+        "datetime_now"
+      ],
+      "source": "created_at TEXT NOT NULL DEFAULT (datetime('now'))"
+    },
+    {
+      "line": 64,
+      "markers": [
+        "autoincrement"
+      ],
+      "source": "id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, action TEXT NOT NULL, document_id INTEGER, details TEXT DEFAULT '',"
+    },
+    {
+      "line": 65,
+      "markers": [
+        "datetime_now"
+      ],
+      "source": "created_at TEXT NOT NULL DEFAULT (datetime('now'))"
+    },
+    {
+      "line": 72,
+      "markers": [
+        "autoincrement"
+      ],
+      "source": "id INTEGER PRIMARY KEY AUTOINCREMENT, case_number TEXT NOT NULL UNIQUE, title TEXT NOT NULL,"
+    },
+    {
+      "line": 75,
+      "markers": [
+        "datetime_now"
+      ],
+      "source": "due_date TEXT DEFAULT '', notes TEXT DEFAULT '', created_by TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT (datetime('now')),"
+    },
+    {
+      "line": 76,
+      "markers": [
+        "datetime_now"
+      ],
+      "source": "updated_at TEXT NOT NULL DEFAULT (datetime('now'))"
+    },
+    {
+      "line": 79,
+      "markers": [
+        "autoincrement"
+      ],
+      "source": "id INTEGER PRIMARY KEY AUTOINCREMENT, case_id INTEGER NOT NULL, event_type TEXT NOT NULL,"
+    },
+    {
+      "line": 80,
+      "markers": [
+        "datetime_now"
+      ],
+      "source": "details TEXT DEFAULT '', created_by TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT (datetime('now')),"
+    },
+    {
+      "line": 85,
+      "markers": [
+        "datetime_now",
+        "autoincrement"
+      ],
+      "source": "CREATE TABLE IF NOT EXISTS local_case_inbox_links (id INTEGER PRIMARY KEY AUTOINCREMENT, case_id INTEGER NOT NULL, inbox_id INTEGER NOT NULL, linked_by TEXT NOT NULL, linked_at TEXT NOT NULL DEFAULT ("
+    },
+    {
+      "line": 86,
+      "markers": [
+        "datetime_now",
+        "autoincrement"
+      ],
+      "source": "CREATE TABLE IF NOT EXISTS local_case_documents (id INTEGER PRIMARY KEY AUTOINCREMENT, case_id INTEGER NOT NULL, document_id INTEGER NOT NULL, linked_by TEXT NOT NULL, linked_at TEXT NOT NULL DEFAULT "
+    },
+    {
+      "line": 87,
+      "markers": [
+        "datetime_now",
+        "autoincrement"
+      ],
+      "source": "CREATE TABLE IF NOT EXISTS local_case_attachments (id INTEGER PRIMARY KEY AUTOINCREMENT, case_id INTEGER NOT NULL, original_name TEXT NOT NULL, stored_name TEXT NOT NULL, mime_type TEXT DEFAULT 'appli"
+    },
+    {
+      "line": 88,
+      "markers": [
+        "datetime_now",
+        "autoincrement"
+      ],
+      "source": "CREATE TABLE IF NOT EXISTS scan_baskets (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL UNIQUE, description TEXT DEFAULT '', cabinet_id INTEGER, default_doc_type TEXT NOT NULL DEFAULT 'incom"
+    },
+    {
+      "line": 89,
+      "markers": [
+        "datetime_now",
+        "autoincrement"
+      ],
+      "source": "CREATE TABLE IF NOT EXISTS scan_inbox (id INTEGER PRIMARY KEY AUTOINCREMENT, basket_id INTEGER NOT NULL, original_name TEXT NOT NULL, stored_name TEXT NOT NULL, mime_type TEXT DEFAULT 'application/pdf"
+    },
+    {
+      "line": 103,
+      "markers": [
+        "sqlite_connect"
+      ],
+      "source": "conn = sqlite3.connect(DB_PATH, timeout=60, factory=ClosingSQLiteConnection)"
+    },
+    {
+      "line": 105,
+      "markers": [
+        "pragma"
+      ],
+      "source": "conn.execute('PRAGMA foreign_keys=ON')"
+    },
+    {
+      "line": 106,
+      "markers": [
+        "pragma"
+      ],
+      "source": "conn.execute('PRAGMA busy_timeout=60000')"
+    },
+    {
+      "line": 121,
+      "markers": [
+        "pragma"
+      ],
+      "source": "c.execute('PRAGMA journal_mode=WAL')"
+    },
+    {
+      "line": 122,
+      "markers": [
+        "pragma"
+      ],
+      "source": "c.execute('PRAGMA synchronous=NORMAL')"
+    },
+    {
+      "line": 123,
+      "markers": [
+        "executescript"
+      ],
+      "source": "c.executescript(SCHEMA)"
+    },
+    {
+      "line": 148,
+      "markers": [
+        "pragma",
+        "table_info"
+      ],
+      "source": "basket_cols={r['name'] for r in c.execute('PRAGMA table_info(scan_baskets)').fetchall()}"
+    },
+    {
+      "line": 150,
+      "markers": [
+        "insert_or_ignore"
+      ],
+      "source": "c.execute(\"INSERT OR IGNORE INTO local_cabinets(name,description) VALUES('الأرشيف العام','خزانة المستندات المحلية')\")"
+    },
+    {
+      "line": 151,
+      "markers": [
+        "insert_or_ignore"
+      ],
+      "source": "c.execute(\"INSERT OR IGNORE INTO local_cabinets(name,description) VALUES('الوارد','الكتب والمعاملات الواردة')\")"
+    },
+    {
+      "line": 152,
+      "markers": [
+        "insert_or_ignore"
+      ],
+      "source": "c.execute(\"INSERT OR IGNORE INTO local_cabinets(name,description) VALUES('الصادر','الكتب والمعاملات الصادرة')\")"
+    },
+    {
+      "line": 153,
+      "markers": [
+        "insert_or_ignore"
+      ],
+      "source": "c.execute(\"INSERT OR IGNORE INTO local_cabinets(name,description) VALUES('القانونية','خزانة كتب ومرفقات القسم القانوني')\")"
+    },
+    {
+      "line": 154,
+      "markers": [
+        "insert_or_ignore"
+      ],
+      "source": "c.execute(\"INSERT OR IGNORE INTO local_cabinets(name,description) VALUES('المجالس التحقيقية','خزانة ملفات المجالس التحقيقية المنجزة وغير المنجزة')\")"
+    },
+    {
+      "line": 155,
+      "markers": [
+        "insert_or_ignore"
+      ],
+      "source": "c.execute(\"INSERT OR IGNORE INTO scan_baskets(name,description,default_doc_type,cabinet_id) SELECT 'سلة القانونية','كتب ومرفقات القسم القانوني','other',id FROM local_cabinets WHERE name='القانونية'\")"
+    },
+    {
+      "line": 156,
+      "markers": [
+        "insert_or_ignore"
+      ],
+      "source": "c.execute(\"INSERT OR IGNORE INTO scan_baskets(name,description,default_doc_type,cabinet_id) SELECT 'سلة المجالس التحقيقية','ملفات المجالس التحقيقية المنجزة وغير المنجزة','other',id FROM local_cabinets"
+    },
+    {
+      "line": 157,
+      "markers": [
+        "insert_or_ignore"
+      ],
+      "source": "c.execute(\"INSERT OR IGNORE INTO scan_baskets(name,description,default_doc_type) VALUES('سلة الوارد','مسح الكتب الواردة','incoming')\")"
+    },
+    {
+      "line": 158,
+      "markers": [
+        "insert_or_ignore"
+      ],
+      "source": "c.execute(\"INSERT OR IGNORE INTO scan_baskets(name,description,default_doc_type) VALUES('سلة الصادر','مسح الكتب الصادرة','outgoing')\")"
+    },
+    {
+      "line": 159,
+      "markers": [
+        "insert_or_ignore"
+      ],
+      "source": "c.execute(\"INSERT OR IGNORE INTO scan_baskets(name,description,default_doc_type) VALUES('سلة المراجعة','مستندات بانتظار التصنيف','other')\")"
+    },
+    {
+      "line": 1147,
+      "markers": [
+        "lastrowid"
+      ],
+      "source": "doc_id=cur.lastrowid"
+    },
+    {
+      "line": 1212,
+      "markers": [
+        "autoincrement"
+      ],
+      "source": "c.execute('CREATE TABLE IF NOT EXISTS scan_inbox_groups (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, basket_id INTEGER NOT NULL, created_by TEXT NOT NULL, created_at TEXT NOT NULL DEFAUL"
+    },
+    {
+      "line": 1393,
+      "markers": [
+        "datetime_now"
+      ],
+      "source": "c.execute(\"UPDATE local_cases SET case_number=?,title=?,case_type=?,status=?,priority=?,owner_department=?,assigned_to=?,due_date=?,notes=?,updated_at=datetime('now') WHERE id=?\","
+    },
+    {
+      "line": 1407,
+      "markers": [
+        "insert_or_ignore"
+      ],
+      "source": "c.execute('INSERT OR IGNORE INTO local_case_documents(case_id,document_id,linked_by) VALUES(?,?,?)',(cid,did,user['username']))"
+    },
+    {
+      "line": 1488,
+      "markers": [
+        "autoincrement"
+      ],
+      "source": "c.execute('CREATE TABLE IF NOT EXISTS scan_inbox_groups (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, basket_id INTEGER NOT NULL, created_by TEXT NOT NULL, created_at TEXT NOT NULL DEFAUL"
+    },
+    {
+      "line": 1502,
+      "markers": [
+        "lastrowid"
+      ],
+      "source": "created.append((cur.lastrowid,name))"
+    },
+    {
+      "line": 1505,
+      "markers": [
+        "lastrowid"
+      ],
+      "source": "for iid,_ in created: c.execute('INSERT INTO scan_inbox_group_items(group_id,inbox_id) VALUES(?,?)',(cur.lastrowid,iid))"
+    },
+    {
+      "line": 1576,
+      "markers": [
+        "autoincrement"
+      ],
+      "source": "c.execute('CREATE TABLE IF NOT EXISTS scan_inbox_groups (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, basket_id INTEGER NOT NULL, created_by TEXT NOT NULL, created_at TEXT NOT NULL DEFAUL"
+    },
+    {
+      "line": 1594,
+      "markers": [
+        "insert_or_replace",
+        "lastrowid"
+      ],
+      "source": "for iid in ids: c.execute('INSERT OR REPLACE INTO scan_inbox_group_items(group_id,inbox_id) VALUES(?,?)',(cur.lastrowid,iid))"
+    },
+    {
+      "line": 1624,
+      "markers": [
+        "lastrowid"
+      ],
+      "source": "scan_id=cur.lastrowid"
+    },
+    {
+      "line": 1685,
+      "markers": [
+        "lastrowid"
+      ],
+      "source": "scan_id=cur.lastrowid"
+    },
+    {
+      "line": 2055,
+      "markers": [
+        "lastrowid"
+      ],
+      "source": "c.execute('INSERT INTO local_case_events(case_id,event_type,details,created_by) VALUES(?,?,?,?)',(cur.lastrowid,'created','إنشاء المعاملة',user['username']))"
+    },
+    {
+      "line": 2063,
+      "markers": [
+        "lastrowid"
+      ],
+      "source": "stored=f\"case_{int(cur.lastrowid)}_import_{secrets.token_hex(10)}{suffix}\""
+    },
+    {
+      "line": 2066,
+      "markers": [
+        "lastrowid"
+      ],
+      "source": "(int(cur.lastrowid),str(item['original_name']),stored,str(item['mime_type'] or mimetypes.guess_type(str(item['original_name']))[0] or 'application/octet-stream'),int(item['file_size'] or 0),'نسخة مستق"
+    },
+    {
+      "line": 2067,
+      "markers": [
+        "lastrowid"
+      ],
+      "source": "c.execute('INSERT INTO local_case_events(case_id,event_type,details,created_by) VALUES(?,?,?,?)',(cur.lastrowid,'basket_file_copied','نسخ ملف من السلة إلى مرفقات المجلس بصورة مستقلة: '+str(item['origi"
+    },
+    {
+      "line": 2069,
+      "markers": [
+        "lastrowid"
+      ],
+      "source": "return self.redirect('/case?id='+str(cur.lastrowid))"
+    },
+    {
+      "line": 2176,
+      "markers": [
+        "datetime_now"
+      ],
+      "source": "c.execute('''UPDATE local_documents SET cabinet_id=?,doc_type=?,document_number=?,document_date=?,subject=?,sender_recipient=?,employee_name=?,keywords=?,notes=?,updated_at=datetime('now') WHERE id=?'"
+    }
+  ],
+  "gate_reasons": [
+    "SQLite-only/runtime constructs remain in main.py"
+  ]
+}

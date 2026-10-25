@@ -1,0 +1,220 @@
+--- a/main.py
++++ b/main.py
+@@ -99,13 +99,27 @@
+         finally:
+             self.close()
+ 
++def mysql_backend_enabled():
++    """Opt-in MySQL runtime, restricted by mysql_secure_config to salah_archive_test."""
++    return os.environ.get('SALAH_ARCHIVE_DB_BACKEND', '').strip().lower() == 'mysql'
++
+ def db():
++    if mysql_backend_enabled():
++        from mysql_runtime_adapter import connect_test_database
++        return connect_test_database(APP_DIR)
+     conn = sqlite3.connect(DB_PATH, timeout=60, factory=ClosingSQLiteConnection)
+     conn.row_factory = sqlite3.Row
+     conn.execute('PRAGMA foreign_keys=ON')
+     conn.execute('PRAGMA busy_timeout=60000')
+     return conn
+ 
++def ensure_scan_group_tables(conn):
++    """MySQL installs these through reviewed DDL; SQLite creates them lazily."""
++    if mysql_backend_enabled():
++        return
++    conn.execute('CREATE TABLE IF NOT EXISTS scan_inbox_groups (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, basket_id INTEGER NOT NULL, created_by TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)')
++    conn.execute('CREATE TABLE IF NOT EXISTS scan_inbox_group_items (group_id INTEGER NOT NULL, inbox_id INTEGER NOT NULL UNIQUE, PRIMARY KEY(group_id,inbox_id))')
++
+ def hash_password(password: str, salt: bytes | None = None):
+     salt = salt or secrets.token_bytes(16)
+     digest = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 310_000)
+@@ -117,10 +131,15 @@
+ 
+ def initialize():
+     with db() as c:
+-        # WAL allows readers to continue while OCR/AI workers write status updates.
+-        c.execute('PRAGMA journal_mode=WAL')
+-        c.execute('PRAGMA synchronous=NORMAL')
+-        c.executescript(SCHEMA)
++        if mysql_backend_enabled():
++            # Install only the reviewed schema in the isolated test DB; no SQLite data is copied here.
++            from mysql_schema_manager import ensure_schema
++            ensure_schema(c._connection, APP_DIR / 'MYSQL_CORE_SCHEMA_V15_62_CANDIDATE.sql')
++        else:
++            # WAL allows readers to continue while OCR/AI workers write status updates.
++            c.execute('PRAGMA journal_mode=WAL')
++            c.execute('PRAGMA synchronous=NORMAL')
++            c.executescript(SCHEMA)
+         # Migrate legacy council/case basket links into independent case attachments.
+         # This decouples council files from basket records so a basket copy can be deleted safely.
+         legacy_links=c.execute('SELECT x.id AS link_id,x.case_id,i.* FROM local_case_inbox_links x JOIN scan_inbox i ON i.id=x.inbox_id ORDER BY x.id').fetchall()
+@@ -144,9 +163,10 @@
+                 continue
+             # Remove the basket relation only after a durable independent attachment was created.
+             c.execute('DELETE FROM local_case_inbox_links WHERE id=?',(int(link['link_id']),))
+-        # Upgrade older databases safely without deleting existing records.
+-        basket_cols={r['name'] for r in c.execute('PRAGMA table_info(scan_baskets)').fetchall()}
+-        if 'is_active' not in basket_cols: c.execute('ALTER TABLE scan_baskets ADD COLUMN is_active INTEGER NOT NULL DEFAULT 1')
++        # Upgrade older SQLite databases safely. MySQL candidate schema already includes is_active.
++        if not mysql_backend_enabled():
++            basket_cols={r['name'] for r in c.execute('PRAGMA table_info(scan_baskets)').fetchall()}
++            if 'is_active' not in basket_cols: c.execute('ALTER TABLE scan_baskets ADD COLUMN is_active INTEGER NOT NULL DEFAULT 1')
+         c.execute("INSERT OR IGNORE INTO local_cabinets(name,description) VALUES('الأرشيف العام','خزانة المستندات المحلية')")
+         c.execute("INSERT OR IGNORE INTO local_cabinets(name,description) VALUES('الوارد','الكتب والمعاملات الواردة')")
+         c.execute("INSERT OR IGNORE INTO local_cabinets(name,description) VALUES('الصادر','الكتب والمعاملات الصادرة')")
+@@ -993,17 +1013,17 @@
+             def suggestions(sql):
+                 try: return [str(x[0]) for x in c.execute(sql).fetchall() if x[0] not in (None,'')]
+                 except Exception: return []
+-            old_numbers=suggestions("SELECT DISTINCT document_number FROM local_documents WHERE document_number<>'' ORDER BY id DESC LIMIT 250")
+-            old_subjects=suggestions("SELECT DISTINCT subject FROM local_documents WHERE subject<>'' ORDER BY id DESC LIMIT 250")
+-            old_people=suggestions("SELECT DISTINCT employee_name FROM local_documents WHERE employee_name<>'' ORDER BY id DESC LIMIT 250")
+-            old_entities=suggestions("SELECT DISTINCT sender_recipient FROM local_documents WHERE sender_recipient<>'' ORDER BY id DESC LIMIT 250")
+-            old_origins=suggestions("SELECT DISTINCT field_value FROM local_document_fields WHERE field_name='origin_entity' AND field_value<>'' ORDER BY id DESC LIMIT 200")
+-            old_destinations=suggestions("SELECT DISTINCT field_value FROM local_document_fields WHERE field_name='destination_entity' AND field_value<>'' ORDER BY id DESC LIMIT 200")
+-            old_cases=suggestions('SELECT DISTINCT case_number FROM local_cases ORDER BY id DESC LIMIT 200')
+-            old_linked_cases=suggestions("SELECT DISTINCT field_value FROM local_document_fields WHERE field_name='linked_case_number' AND field_value<>'' ORDER BY id DESC LIMIT 200")
+-            old_departments=suggestions("SELECT DISTINCT field_value FROM local_document_fields WHERE field_name='department' AND field_value<>'' ORDER BY id DESC LIMIT 100")
+-            old_keywords=suggestions("SELECT DISTINCT keywords FROM local_documents WHERE keywords<>'' ORDER BY id DESC LIMIT 200")
+-            old_dates=suggestions("SELECT DISTINCT document_date FROM local_documents WHERE document_date<>'' ORDER BY id DESC LIMIT 200")
++            old_numbers=suggestions("SELECT document_number FROM local_documents WHERE document_number<>'' GROUP BY document_number ORDER BY MAX(id) DESC LIMIT 250")
++            old_subjects=suggestions("SELECT subject FROM local_documents WHERE subject<>'' GROUP BY subject ORDER BY MAX(id) DESC LIMIT 250")
++            old_people=suggestions("SELECT employee_name FROM local_documents WHERE employee_name<>'' GROUP BY employee_name ORDER BY MAX(id) DESC LIMIT 250")
++            old_entities=suggestions("SELECT sender_recipient FROM local_documents WHERE sender_recipient<>'' GROUP BY sender_recipient ORDER BY MAX(id) DESC LIMIT 250")
++            old_origins=suggestions("SELECT field_value FROM local_document_fields WHERE field_name='origin_entity' AND field_value<>'' GROUP BY field_value ORDER BY MAX(id) DESC LIMIT 200")
++            old_destinations=suggestions("SELECT field_value FROM local_document_fields WHERE field_name='destination_entity' AND field_value<>'' GROUP BY field_value ORDER BY MAX(id) DESC LIMIT 200")
++            old_cases=suggestions('SELECT case_number FROM local_cases GROUP BY case_number ORDER BY MAX(id) DESC LIMIT 200')
++            old_linked_cases=suggestions("SELECT field_value FROM local_document_fields WHERE field_name='linked_case_number' AND field_value<>'' GROUP BY field_value ORDER BY MAX(id) DESC LIMIT 200")
++            old_departments=suggestions("SELECT field_value FROM local_document_fields WHERE field_name='department' AND field_value<>'' GROUP BY field_value ORDER BY MAX(id) DESC LIMIT 100")
++            old_keywords=suggestions("SELECT keywords FROM local_documents WHERE keywords<>'' GROUP BY keywords ORDER BY MAX(id) DESC LIMIT 200")
++            old_dates=suggestions("SELECT document_date FROM local_documents WHERE document_date<>'' GROUP BY document_date ORDER BY MAX(id) DESC LIMIT 200")
+         def dl(name, items): return f'<datalist id="{name}">'+''.join(f'<option value="{esc(v)}"></option>' for v in items)+'</datalist>'
+         def display_date(value):
+             value=str(value or '').strip()
+@@ -1163,7 +1183,7 @@
+                         try: target.unlink()
+                         except OSError: pass
+                     raise
+-            sync_document(doc_id, APP_DIR)
++            if not mysql_backend_enabled(): sync_document(doc_id, APP_DIR)
+             return self.redirect(f'/view/{doc_id}')
+         except Exception as e:
+             try: retry_scan_id=int(f.get('scan_id','0') or 0)
+@@ -1209,8 +1229,7 @@
+         if not message:
+             message=urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query).get('message',[''])[0]
+         with db() as c:
+-            c.execute('CREATE TABLE IF NOT EXISTS scan_inbox_groups (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, basket_id INTEGER NOT NULL, created_by TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)')
+-            c.execute('CREATE TABLE IF NOT EXISTS scan_inbox_group_items (group_id INTEGER NOT NULL, inbox_id INTEGER NOT NULL UNIQUE, PRIMARY KEY(group_id,inbox_id))')
++            ensure_scan_group_tables(c)
+             baskets=c.execute('SELECT * FROM scan_baskets WHERE is_active=1 ORDER BY id').fetchall()
+             inbox=c.execute("SELECT i.*,b.name basket,g.name AS group_name FROM scan_inbox i JOIN scan_baskets b ON b.id=i.basket_id LEFT JOIN scan_inbox_group_items gi ON gi.inbox_id=i.id LEFT JOIN scan_inbox_groups g ON g.id=gi.group_id WHERE i.status!='archived' ORDER BY i.id DESC LIMIT 100").fetchall()
+             archived_inbox=c.execute("SELECT i.*,b.name basket FROM scan_inbox i JOIN scan_baskets b ON b.id=i.basket_id WHERE i.status='archived' ORDER BY i.id DESC LIMIT 50").fetchall()
+@@ -1485,8 +1504,7 @@
+             with db() as c:
+                 basket=c.execute('SELECT id,name FROM scan_baskets WHERE id=? AND is_active=1',(bid,)).fetchone()
+                 if not basket: raise ValueError('اختر سلة فعالة.')
+-                c.execute('CREATE TABLE IF NOT EXISTS scan_inbox_groups (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, basket_id INTEGER NOT NULL, created_by TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)')
+-                c.execute('CREATE TABLE IF NOT EXISTS scan_inbox_group_items (group_id INTEGER NOT NULL, inbox_id INTEGER NOT NULL UNIQUE, PRIMARY KEY(group_id,inbox_id))')
++                ensure_scan_group_tables(c)
+                 created=[]; duplicates=[]
+                 for name,payload,mime in uploads:
+                     ext=Path(name).suffix.lower()
+@@ -1573,8 +1591,7 @@
+                 audit(user['username'],'scan_inbox_deleted',None,str(iid))
+                 return self.redirect('/scan?message='+urllib.parse.quote('تم حذف الملف من السلة بنجاح. وأي نسخة مرتبطة بمجلس حُفظت كمرفق مستقل أولاً.'))
+             with db() as c:
+-                c.execute('CREATE TABLE IF NOT EXISTS scan_inbox_groups (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, basket_id INTEGER NOT NULL, created_by TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)')
+-                c.execute('CREATE TABLE IF NOT EXISTS scan_inbox_group_items (group_id INTEGER NOT NULL, inbox_id INTEGER NOT NULL UNIQUE, PRIMARY KEY(group_id,inbox_id))')
++                ensure_scan_group_tables(c)
+                 raw=f.get('selected_ids','')
+                 ids=[]
+                 for val in raw.split(','):
+@@ -1904,34 +1921,40 @@
+         if cfgfile.exists():
+             try: v=json.loads(cfgfile.read_text(encoding='utf-8'))
+             except Exception: pass
+-        body='<section class="card"><h1>إعداد MySQL</h1><p>أدخل بيانات قاعدة MySQL محلية أو على خادم المؤسسة. لا تستخدم حساب root للتشغيل اليومي.</p>'
++        body='<section class="card"><h1>إعداد MySQL التجريبي</h1><p>هذا الإصدار يختبر قاعدة منفصلة باسم salah_archive_test فقط. لا تستخدم قاعدة الأرشيف الأصلية.</p>'
+         if message: body+='<div class="notice">'+esc(message)+'</div>'
+-        body+='<div class="notice">MySQL مخصص لفهرس الكتب وحقولها، أما ملفات PDF فتبقى منفصلة في local_archive_files. يحتفظ SQLite بسجل التشغيل المحلي أيضاً؛ انسخ قاعدة البيانات ومجلد الملفات احتياطياً قبل الترحيل.</div><form method="post" action="/mysql-save"><div class="form-grid">'
+-        for key,label,default in [('host','الخادم','127.0.0.1'),('port','المنفذ','3306'),('database','قاعدة البيانات','administrative_archive'),('user','المستخدم','archive_app')]: body+='<div><label>'+label+'</label><input name="'+key+'" value="'+esc(v.get(key,default))+'" required></div>'
+-        body+='<div class="span-2"><label>كلمة المرور</label><input type="password" name="password" value="'+esc(v.get('password',''))+'"></div></div><button>حفظ</button> <button formaction="/mysql-test">اختبار الاتصال وتهيئة الجداول</button></form></section>'
++        body+='<div class="notice">بيانات الاتصال غير السرية تُحفظ محلياً، أما كلمة المرور فتُقرأ من متغير البيئة SALAH_MYSQL_PASSWORD ولا تُحفظ في JSON. إنشاء المخطط لا ينقل بيانات SQLite الحالية. ملفات PDF تبقى في مجلد local_archive_files.</div><form method="post" action="/mysql-save"><div class="form-grid">'
++        for key,label,default in [('host','الخادم','127.0.0.1'),('port','المنفذ','3306'),('database','قاعدة الاختبار','salah_archive_test'),('user','المستخدم','archive_test_app')]:
++            lock=' readonly' if key=='database' else ''
++            body+='<div><label>'+label+'</label><input name="'+key+'" value="'+esc(v.get(key,default))+'" required'+lock+'></div>'
++        body+='</div><button>حفظ إعدادات الاختبار</button> <button formaction="/mysql-test">فحص الاتصال وتجهيز مخطط الاختبار</button></form><p class="muted">لتجربة التشغيل بعد تجهيز قاعدة الاختبار، عيّن SALAH_ARCHIVE_DB_BACKEND=mysql في بيئة التشغيل ثم أعد تشغيل البرنامج. لا تفعّل هذا الخيار قبل اختبار بيانات منفصلة.</p></section>'
+         return self.send_html(page('إعداد MySQL',body,user))
+ 
+     def mysql_save(self,user):
+         if user['role']!='admin': return self.mysql_page(user,'للمدير فقط.')
+         f=self.form()
+-        try: cfg={'host':f.get('host','127.0.0.1').strip(),'port':int(f.get('port','3306')),'database':f.get('database','').strip(),'user':f.get('user','').strip(),'password':f.get('password','')}
+-        except ValueError: return self.mysql_page(user,'رقم المنفذ غير صحيح.')
+-        if not cfg['database'] or not cfg['user']: return self.mysql_page(user,'اسم قاعدة البيانات والمستخدم مطلوبان.')
+-        (APP_DIR/'mysql_config.json').write_text(json.dumps(cfg,ensure_ascii=False,indent=2),encoding='utf-8')
+-        try: os.chmod(APP_DIR/'mysql_config.json',0o600)
+-        except OSError: pass
+-        return self.mysql_page(user,'تم حفظ الإعدادات محلياً.')
++        try:
++            cfg={'host':f.get('host','127.0.0.1').strip(),'port':int(f.get('port','3306')),'database':'salah_archive_test','user':f.get('user','').strip()}
++            from mysql_secure_config import save_config
++            save_config(APP_DIR,cfg,enforce_test_db=True)
++        except (ValueError, Exception) as exc:
++            return self.mysql_page(user,'تعذر حفظ الإعدادات: '+str(exc))
++        return self.mysql_page(user,'تم حفظ بيانات الاتصال غير السرية فقط. عيّن SALAH_MYSQL_PASSWORD كمتغير بيئة لاختبار الاتصال.')
+ 
+     def mysql_test(self,user):
++        if user['role']!='admin': return self.mysql_page(user,'للمدير فقط.')
+         try:
+-            import mysql.connector
+-            cfg=json.loads((APP_DIR/'mysql_config.json').read_text(encoding='utf-8')); conn=mysql.connector.connect(**cfg,connection_timeout=5); cur=conn.cursor()
+-            cur.execute('CREATE TABLE IF NOT EXISTS scan_baskets (id BIGINT PRIMARY KEY, name VARCHAR(190) NOT NULL UNIQUE, description TEXT, default_doc_type VARCHAR(40), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP) CHARACTER SET utf8mb4')
+-            cur.execute('CREATE TABLE IF NOT EXISTS scan_inbox (id BIGINT PRIMARY KEY, basket_id BIGINT NOT NULL, original_name VARCHAR(512) NOT NULL, sha256 CHAR(64) NOT NULL, status VARCHAR(32) NOT NULL, created_by VARCHAR(190), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, INDEX idx_scan_basket_status (basket_id,status)) CHARACTER SET utf8mb4')
+-            cur.execute("CREATE TABLE IF NOT EXISTS archive_index (document_id BIGINT PRIMARY KEY, cabinet_id BIGINT, cabinet_name VARCHAR(255), doc_type VARCHAR(40), document_number VARCHAR(255), document_date VARCHAR(32), subject TEXT, sender_recipient TEXT, employee_name TEXT, keywords TEXT, notes LONGTEXT, original_name VARCHAR(1024), stored_name VARCHAR(255), mime_type VARCHAR(255), file_size BIGINT, sha256 CHAR(64), created_by VARCHAR(190), created_at VARCHAR(32), updated_at VARCHAR(32), indexed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, INDEX idx_archive_number (document_number), INDEX idx_archive_date (document_date), INDEX idx_archive_sha (sha256)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci")
+-            cur.execute("CREATE TABLE IF NOT EXISTS archive_index_fields (document_id BIGINT NOT NULL, field_name VARCHAR(190) NOT NULL, field_value LONGTEXT, PRIMARY KEY(document_id,field_name), INDEX idx_archive_field_name(field_name), CONSTRAINT fk_archive_index_fields_document FOREIGN KEY(document_id) REFERENCES archive_index(document_id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci")
+-            conn.commit(); cur.close(); conn.close(); ok_count, failed_count = rebuild_index(APP_DIR); return self.mysql_page(user,'نجح الاتصال. تهيأت جداول فهرسة الكتب وحقولها في MySQL، وأعيدت مزامنة '+str(ok_count)+' سجل فهرسة. الملفات PDF منفصلة داخل local_archive_files. سجلات تعذرت مزامنتها: '+str(failed_count)+'.')
+-        except Exception as e: return self.mysql_page(user,'فشل الاتصال: '+str(e)+'. ثبّت mysql-connector-python وأنشئ قاعدة البيانات والمستخدم والصلاحيات.')
++            from mysql_runtime_adapter import connect_test_database
++            from mysql_schema_manager import ensure_schema
++            conn=connect_test_database(APP_DIR)
++            try:
++                tables=ensure_schema(conn._connection, APP_DIR/'MYSQL_CORE_SCHEMA_V15_62_CANDIDATE.sql')
++                conn.commit()
++            finally:
++                conn.close()
++            return self.mysql_page(user,'نجح الاتصال بقاعدة salah_archive_test. جرى التحقق من المخطط المرشح ('+str(len(tables))+' جدولاً). لم تُنقل بيانات SQLite ولم تُلمس قاعدة الإنتاج.')
++        except Exception as e:
++            return self.mysql_page(user,'فشل اختبار قاعدة MySQL التجريبية: '+str(e))
+ 
+     def launch_scanner(self):
+         # Locate NAPS2 through explicit setting, PATH, common install folders, and Windows uninstall registry.
+@@ -2136,7 +2159,8 @@
+                         imported_ids.append(c.execute('SELECT id FROM local_documents WHERE stored_name=?',(stored,)).fetchone()['id'])
+                     except Exception:
+                         target.unlink(missing_ok=True); raise
+-            for imported_id in imported_ids: sync_document(imported_id, APP_DIR)
++            if not mysql_backend_enabled():
++                for imported_id in imported_ids: sync_document(imported_id, APP_DIR)
+             audit(user['username'],'bulk_library_import',None,f'imported={imported}; skipped={skipped}')
+             message=f'اكتمل الاستيراد: {imported} ملف جديد، وتجاوز {skipped} ملفاً مكرراً.'
+             if errors: message+=' ملفات لم تستورد: '+'؛ '.join(errors[:8])
+@@ -2179,7 +2203,7 @@
+                 value=f.get(key,'').strip()
+                 c.execute('DELETE FROM local_document_fields WHERE document_id=? AND field_name=?',(doc_id,key))
+                 if value: c.execute('INSERT INTO local_document_fields(document_id,field_name,field_value) VALUES(?,?,?)',(doc_id,key,value))
+-        sync_document(doc_id, APP_DIR)
++        if not mysql_backend_enabled(): sync_document(doc_id, APP_DIR)
+         audit(user['username'],'document_metadata_updated',doc_id)
+         return self.redirect('/view/'+str(doc_id))
+ 
+@@ -2338,7 +2362,7 @@
+                        UNION ALL SELECT 1 FROM scan_inbox WHERE stored_name=?
+                        UNION ALL SELECT 1 FROM local_case_attachments WHERE stored_name=?
+                        LIMIT 1""", (stored_name,stored_name,stored_name)).fetchone()
+-            delete_index_record(doc_id, APP_DIR)
++            if not mysql_backend_enabled(): delete_index_record(doc_id, APP_DIR)
+             if not still_referenced:
+                 try:
+                     (FILES_DIR/stored_name).unlink(missing_ok=True)

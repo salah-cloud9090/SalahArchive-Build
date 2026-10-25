@@ -1,0 +1,20 @@
+Salah Archive — MySQL Candidate Static Gate
+===========================================
+
+Status: PASS_STATIC_CANDIDATE
+
+PASS — candidate_present
+PASS — opt_in_backend_flag
+PASS — reviewed_schema_bootstrap
+PASS — test_db_ui_locked
+PASS — password_not_form_persisted
+PASS — sqlite_setup_guarded
+PASS — known_replace_statement_reviewed
+PASS — mysql_sync_not_run_on_archive_crud
+PASS — original_sqlite_source_retained
+PASS — not_claimed_live_tested
+
+Limitations:
+- No MySQL server connection was attempted.
+- No real archive CRUD, scanner, attachment, or AI workflow was executed.
+- Candidate remains unsigned and is not installed over main.py.

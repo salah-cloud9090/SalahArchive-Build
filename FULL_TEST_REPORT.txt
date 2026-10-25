@@ -1,0 +1,21 @@
+SALAH ARCHIVE v15.81 - FULL TEST REPORT
+Started: 2026-10-25T01:17:40+00:00
+Finished: 2026-10-25T01:17:49+00:00
+Overall: PASS_WITH_LIVE_TEST_SKIPPED
+
+Note: no password is written to this report.
+
+[PASS] 1. Strict Python syntax compile (candidate + modules; preserved original checked separately)
+  exit code: 0
+
+[PASS] 2. Unit test suite
+  exit code: 0
+
+[PASS] 3. Isolated SQLite smoke test
+  exit code: 0
+
+[PASS] 4. Package integrity guard
+  exit code: 0
+
+[NOT RUN] Live MySQL integration
+  Skipped by user. No live database claims made.

@@ -1,0 +1,36 @@
+Salah Archive — Pre-final MySQL Integration Audit
+=================================================
+
+Static-only pre-final integration audit; no database opened and no network connection attempted.
+Status: BLOCKED
+
+Runtime SQLite markers:
+- runtime_sqlite_connect: PRESENT
+- runtime_executescript: PRESENT
+- runtime_pragma: PRESENT
+- runtime_sqlite_datetime: PRESENT
+- dynamic_table_ddl: PRESENT
+- direct_connection_contexts: PRESENT
+
+Repository API coverage:
+- context_manager: present
+- commit: present
+- rollback: present
+- executescript_fails_closed: present
+
+Blockers:
+- runtime_sqlite_connect
+- runtime_executescript
+- runtime_pragma
+- runtime_sqlite_datetime
+- dynamic_table_ddl
+- direct_connection_contexts
+- main.py is not wired to MySQLRepository
+
+Safety confirmation:
+- Original database opened: No
+- DDL executed: No
+- MySQL contacted: No
+
+Next safe step:
+Refactor database initialization and all SQLite-only setup behind a separately tested MySQL bootstrap; then run CRUD and attachment integration tests against salah_archive_test only.

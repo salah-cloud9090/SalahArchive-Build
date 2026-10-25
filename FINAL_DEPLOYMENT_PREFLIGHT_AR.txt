@@ -1,0 +1,17 @@
+Salah Archive v15.79 — Final Deployment Preflight
+====================================================
+
+Unit tests: PASS
+Python compile: PASS
+Static migration gate: BLOCKED
+Integration gate: BLOCKED
+Candidate static gate: PASS_STATIC_CANDIDATE
+MySQL candidate strict compile: PASS
+Deployment ready: NO
+
+Safety: no production database opened; no DDL run; no MySQL server contacted.
+
+Reason deployment is not declared ready:
+The production main.py remains SQLite-based; the MySQL candidate is unsigned and live CRUD/attachment verification has not been performed.
+
+See FINAL_DEPLOYMENT_PREFLIGHT.json and FINAL_GATE_UNIT_TESTS.txt for details.

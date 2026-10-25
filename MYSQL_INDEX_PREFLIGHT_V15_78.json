@@ -1,0 +1,691 @@
+{
+  "version": "15.78",
+  "status": "PASS_STATIC",
+  "target_database": "salah_archive_test",
+  "tables_checked": 16,
+  "indexes_checked": 40,
+  "foreign_keys_checked": 14,
+  "foreign_keys": [
+    {
+      "table": "local_documents",
+      "columns": [
+        "cabinet_id"
+      ],
+      "references_table": "local_cabinets",
+      "references_columns": [
+        "id"
+      ]
+    },
+    {
+      "table": "local_document_fields",
+      "columns": [
+        "document_id"
+      ],
+      "references_table": "local_documents",
+      "references_columns": [
+        "id"
+      ]
+    },
+    {
+      "table": "local_case_events",
+      "columns": [
+        "case_id"
+      ],
+      "references_table": "local_cases",
+      "references_columns": [
+        "id"
+      ]
+    },
+    {
+      "table": "scan_baskets",
+      "columns": [
+        "cabinet_id"
+      ],
+      "references_table": "local_cabinets",
+      "references_columns": [
+        "id"
+      ]
+    },
+    {
+      "table": "scan_inbox",
+      "columns": [
+        "basket_id"
+      ],
+      "references_table": "scan_baskets",
+      "references_columns": [
+        "id"
+      ]
+    },
+    {
+      "table": "scan_inbox_groups",
+      "columns": [
+        "basket_id"
+      ],
+      "references_table": "scan_baskets",
+      "references_columns": [
+        "id"
+      ]
+    },
+    {
+      "table": "scan_inbox_group_items",
+      "columns": [
+        "group_id"
+      ],
+      "references_table": "scan_inbox_groups",
+      "references_columns": [
+        "id"
+      ]
+    },
+    {
+      "table": "scan_inbox_group_items",
+      "columns": [
+        "inbox_id"
+      ],
+      "references_table": "scan_inbox",
+      "references_columns": [
+        "id"
+      ]
+    },
+    {
+      "table": "local_case_inbox_links",
+      "columns": [
+        "case_id"
+      ],
+      "references_table": "local_cases",
+      "references_columns": [
+        "id"
+      ]
+    },
+    {
+      "table": "local_case_inbox_links",
+      "columns": [
+        "inbox_id"
+      ],
+      "references_table": "scan_inbox",
+      "references_columns": [
+        "id"
+      ]
+    },
+    {
+      "table": "local_case_documents",
+      "columns": [
+        "case_id"
+      ],
+      "references_table": "local_cases",
+      "references_columns": [
+        "id"
+      ]
+    },
+    {
+      "table": "local_case_documents",
+      "columns": [
+        "document_id"
+      ],
+      "references_table": "local_documents",
+      "references_columns": [
+        "id"
+      ]
+    },
+    {
+      "table": "local_case_attachments",
+      "columns": [
+        "case_id"
+      ],
+      "references_table": "local_cases",
+      "references_columns": [
+        "id"
+      ]
+    },
+    {
+      "table": "archive_index_fields",
+      "columns": [
+        "document_id"
+      ],
+      "references_table": "archive_index",
+      "references_columns": [
+        "document_id"
+      ]
+    }
+  ],
+  "errors": [],
+  "limitations": [
+    "Static parsing only; no MySQL server connection was made.",
+    "Existing database columns, indexes, and foreign keys are checked at runtime by ensure_schema before CREATE TABLE statements.",
+    "Foreign-key definitions are parsed statically and checked against existing test tables before DDL; server collation/version still require live validation.",
+    "The production database salah_archive was not accessed or modified."
+  ],
+  "tables": [
+    {
+      "table": "local_cabinets",
+      "column_count": 4,
+      "index_count": 2,
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "unique": true,
+          "columns": [
+            {
+              "name": "id",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "name",
+          "unique": true,
+          "columns": [
+            {
+              "name": "name",
+              "prefix_length": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "table": "local_documents",
+      "column_count": 18,
+      "index_count": 5,
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "unique": true,
+          "columns": [
+            {
+              "name": "id",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "idx_local_docs_date",
+          "unique": false,
+          "columns": [
+            {
+              "name": "document_date",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "idx_local_docs_number",
+          "unique": false,
+          "columns": [
+            {
+              "name": "document_number",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "idx_local_docs_sha",
+          "unique": false,
+          "columns": [
+            {
+              "name": "sha256",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "idx_local_docs_subject",
+          "unique": false,
+          "columns": [
+            {
+              "name": "subject",
+              "prefix_length": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "table": "local_document_fields",
+      "column_count": 4,
+      "index_count": 3,
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "unique": true,
+          "columns": [
+            {
+              "name": "id",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "idx_local_document_fields_document",
+          "unique": false,
+          "columns": [
+            {
+              "name": "document_id",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "idx_local_document_fields_name",
+          "unique": false,
+          "columns": [
+            {
+              "name": "field_name",
+              "prefix_length": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "table": "local_users",
+      "column_count": 7,
+      "index_count": 2,
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "unique": true,
+          "columns": [
+            {
+              "name": "id",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "username",
+          "unique": true,
+          "columns": [
+            {
+              "name": "username",
+              "prefix_length": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "table": "local_audit",
+      "column_count": 6,
+      "index_count": 3,
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "unique": true,
+          "columns": [
+            {
+              "name": "id",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "idx_local_audit_created",
+          "unique": false,
+          "columns": [
+            {
+              "name": "created_at",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "idx_local_audit_document",
+          "unique": false,
+          "columns": [
+            {
+              "name": "document_id",
+              "prefix_length": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "table": "local_cases",
+      "column_count": 13,
+      "index_count": 4,
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "unique": true,
+          "columns": [
+            {
+              "name": "id",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "case_number",
+          "unique": true,
+          "columns": [
+            {
+              "name": "case_number",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "idx_local_cases_number",
+          "unique": false,
+          "columns": [
+            {
+              "name": "case_number",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "idx_local_cases_status",
+          "unique": false,
+          "columns": [
+            {
+              "name": "status",
+              "prefix_length": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "table": "local_case_events",
+      "column_count": 6,
+      "index_count": 2,
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "unique": true,
+          "columns": [
+            {
+              "name": "id",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "idx_local_case_events_case",
+          "unique": false,
+          "columns": [
+            {
+              "name": "case_id",
+              "prefix_length": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "table": "scan_baskets",
+      "column_count": 8,
+      "index_count": 2,
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "unique": true,
+          "columns": [
+            {
+              "name": "id",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "name",
+          "unique": true,
+          "columns": [
+            {
+              "name": "name",
+              "prefix_length": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "table": "scan_inbox",
+      "column_count": 12,
+      "index_count": 2,
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "unique": true,
+          "columns": [
+            {
+              "name": "id",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "idx_scan_inbox_basket",
+          "unique": false,
+          "columns": [
+            {
+              "name": "basket_id",
+              "prefix_length": null
+            },
+            {
+              "name": "status",
+              "prefix_length": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "table": "scan_inbox_groups",
+      "column_count": 5,
+      "index_count": 2,
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "unique": true,
+          "columns": [
+            {
+              "name": "id",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "idx_scan_inbox_groups_basket",
+          "unique": false,
+          "columns": [
+            {
+              "name": "basket_id",
+              "prefix_length": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "table": "scan_inbox_group_items",
+      "column_count": 2,
+      "index_count": 2,
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "unique": true,
+          "columns": [
+            {
+              "name": "group_id",
+              "prefix_length": null
+            },
+            {
+              "name": "inbox_id",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "uq_scan_inbox_group_item_inbox",
+          "unique": true,
+          "columns": [
+            {
+              "name": "inbox_id",
+              "prefix_length": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "table": "local_case_inbox_links",
+      "column_count": 5,
+      "index_count": 2,
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "unique": true,
+          "columns": [
+            {
+              "name": "id",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "uq_case_inbox",
+          "unique": true,
+          "columns": [
+            {
+              "name": "case_id",
+              "prefix_length": null
+            },
+            {
+              "name": "inbox_id",
+              "prefix_length": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "table": "local_case_documents",
+      "column_count": 5,
+      "index_count": 2,
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "unique": true,
+          "columns": [
+            {
+              "name": "id",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "uq_case_document",
+          "unique": true,
+          "columns": [
+            {
+              "name": "case_id",
+              "prefix_length": null
+            },
+            {
+              "name": "document_id",
+              "prefix_length": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "table": "local_case_attachments",
+      "column_count": 9,
+      "index_count": 1,
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "unique": true,
+          "columns": [
+            {
+              "name": "id",
+              "prefix_length": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "table": "archive_index",
+      "column_count": 20,
+      "index_count": 4,
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "unique": true,
+          "columns": [
+            {
+              "name": "document_id",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "idx_archive_date",
+          "unique": false,
+          "columns": [
+            {
+              "name": "document_date",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "idx_archive_number",
+          "unique": false,
+          "columns": [
+            {
+              "name": "document_number",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "idx_archive_sha",
+          "unique": false,
+          "columns": [
+            {
+              "name": "sha256",
+              "prefix_length": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "table": "archive_index_fields",
+      "column_count": 3,
+      "index_count": 2,
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "unique": true,
+          "columns": [
+            {
+              "name": "document_id",
+              "prefix_length": null
+            },
+            {
+              "name": "field_name",
+              "prefix_length": null
+            }
+          ]
+        },
+        {
+          "name": "idx_archive_field_name",
+          "unique": false,
+          "columns": [
+            {
+              "name": "field_name",
+              "prefix_length": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

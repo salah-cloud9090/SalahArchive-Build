@@ -1,0 +1,2 @@
+compileall=True
+strict_compile_returncode=0

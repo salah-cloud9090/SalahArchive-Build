@@ -1,0 +1,20 @@
+test_dashboard_uses_database_counts_not_static_mock_values (test_v16_14_reference_ui.V1614ReferenceUITests.test_dashboard_uses_database_counts_not_static_mock_values) ... ok
+test_existing_autofill_fallbacks_are_preserved (test_v16_14_reference_ui.V1614ReferenceUITests.test_existing_autofill_fallbacks_are_preserved) ... ok
+test_four_zone_council_layout_is_explicit_and_left_to_right (test_v16_14_reference_ui.V1614ReferenceUITests.test_four_zone_council_layout_is_explicit_and_left_to_right) ... ok
+test_navigation_and_admin_menu_are_real_routes (test_v16_14_reference_ui.V1614ReferenceUITests.test_navigation_and_admin_menu_are_real_routes) ... ok
+test_responsive_layout_rules_exist (test_v16_14_reference_ui.V1614ReferenceUITests.test_responsive_layout_rules_exist) ... ok
+test_council_metadata_panel_closes_before_workspace (test_v16_13_layout_and_autofill.V1613LayoutAndAutofillTests.test_council_metadata_panel_closes_before_workspace) ... ok
+test_first_pass_suggestion_normalized_and_bounded_retry_exists (test_v16_13_layout_and_autofill.V1613LayoutAndAutofillTests.test_first_pass_suggestion_normalized_and_bounded_retry_exists) ... ok
+test_no_fabricated_date_or_number_on_empty_text (test_v16_13_layout_and_autofill.V1613LayoutAndAutofillTests.test_no_fabricated_date_or_number_on_empty_text) ... ok
+test_realistic_arabic_fields_fallback (test_v16_13_layout_and_autofill.V1613LayoutAndAutofillTests.test_realistic_arabic_fields_fallback) ... ok
+test_scan_form_does_not_invent_today_as_document_date (test_v16_13_layout_and_autofill.V1613LayoutAndAutofillTests.test_scan_form_does_not_invent_today_as_document_date) ... ok
+test_archive_assistant_uses_real_database_search_context (test_v16_07_release_features.ReleaseFeatureTests.test_archive_assistant_uses_real_database_search_context) ... ok
+test_attachment_ui_has_name_size_and_remove_control (test_v16_07_release_features.ReleaseFeatureTests.test_attachment_ui_has_name_size_and_remove_control) ... ok
+test_case_ui_posts_multiple_selected_files (test_v16_07_release_features.ReleaseFeatureTests.test_case_ui_posts_multiple_selected_files) ... ok
+test_merge_pdf_and_image_creates_valid_pdf_and_preserves_sources (test_v16_07_release_features.ReleaseFeatureTests.test_merge_pdf_and_image_creates_valid_pdf_and_preserves_sources) ... ok
+test_rejects_unsupported_merge_type (test_v16_07_release_features.ReleaseFeatureTests.test_rejects_unsupported_merge_type) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.140s
+
+OK

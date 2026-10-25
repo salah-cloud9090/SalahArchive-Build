@@ -1,0 +1,16 @@
+{
+  "version": "15.81",
+  "status": "READY_FOR_USER_LIVE_MYSQL_TEST",
+  "unit_tests": {"passed": 158, "failed": 0},
+  "strict_compile": "PASS",
+  "isolated_sqlite_smoke": "PASS",
+  "candidate_help_smoke": "PASS",
+  "signed_base_integrity": "PASS",
+  "package_zip_integrity": "PASS",
+  "live_mysql_test": "NOT_RUN_IN_BUILD_ENVIRONMENT",
+  "production_database_opened": false,
+  "production_database_modified": false,
+  "target_for_live_test": "salah_archive_test",
+  "production_release_ready": false,
+  "reason_not_production_ready": "A live MySQL integration run must pass on the user's MySQL84 service in local mode and on the central server before targeting salah_archive."
+}

@@ -1,0 +1,20 @@
+Local smoke-test summary — Salah Archive v15.74
+================================================
+Scope: synthetic temporary SQLite database created from the original application schema in the extracted build folder. This is not the user's database and contains no user records.
+
+Results:
+- Original main.py initialize(): PASS
+- Required core tables found: 10/10 checked
+- Default cabinets seeded: 5
+- Default baskets seeded: 5
+- Admin user seeded: 1
+- Safe migration dry-run: DRY_RUN_PASS
+- Source tables detected: 12
+- Candidate MySQL tables: 16
+- Schema coverage errors: 0
+- External files checked: 0 (synthetic database contains no documents)
+- MySQL server contacted: NO
+- DDL executed against MySQL: NO
+- User's original database opened or modified: NO
+
+This proves only local SQLite startup and static/dry-run source-schema coverage. It does not prove live MySQL connection, record transfer, or application CRUD/attachment behavior on MySQL.

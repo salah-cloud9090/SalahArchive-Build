@@ -1,0 +1,32 @@
+Salah Archive — Final MySQL Migration Gate
+============================================
+
+Static-only check; no database opened and no schema applied.
+Status: BLOCKED
+Source tables: 16
+Candidate tables: 16
+SQLite marker lines: 53
+
+Gate reasons:
+- SQLite-only/runtime constructs remain in main.py
+
+Missing tables:
+- None
+
+Extra MySQL candidate tables:
+- None
+
+Missing columns:
+
+SQLite marker counts:
+- sqlite_connect: 1
+- pragma: 6
+- executescript: 1
+- insert_or_ignore: 11
+- insert_or_replace: 1
+- lastrowid: 11
+- datetime_now: 14
+- table_info: 1
+- autoincrement: 15
+
+Interpretation: this gate intentionally does not claim migration readiness while SQLite runtime constructs remain.

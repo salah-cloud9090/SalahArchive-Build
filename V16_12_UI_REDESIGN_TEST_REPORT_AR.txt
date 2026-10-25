@@ -1,0 +1,95 @@
+Salah Archive v16.12 — تقرير فحص مرشح إعادة تصميم الواجهة
+
+Integrity verification: PASS (OK)
+Files hashed and signed: 296
+
+Python compile:
+- test_v16_07_release_features.py: PASS
+- main_mysql_candidate_v15_81.py: PASS
+- test_mysql_candidate_gate.py: PASS
+- mysql_candidate_gate.py: PASS
+- mysql_repository.py: PASS
+- test_mysql_candidate_v15_76.py: PASS
+- verify_python_compile.py: PASS
+- run_full_tests.py: PASS
+- mysql_query_compat_audit.py: PASS
+- license_core.py: PASS
+- migrate_sqlite_to_mysql.py: PASS
+- integrity_guard.py: PASS
+- run_mysql_application.py: PASS
+- test_mysql_profile_ui.py: PASS
+- release_readiness_check.py: PASS
+- test_mysql_runtime_compat_audit.py: PASS
+- scanner_wia.py: PASS
+- test_mysql_migration_readiness.py: PASS
+- test_migration_safety.py: PASS
+- test_mysql_safety.py: PASS
+- main_mysql_candidate.py: PASS
+- test_repository_contract.py: PASS
+- mysql_sql_compat.py: PASS
+- test_v16_10_field_fallbacks.py: PASS
+- diagnostics.py: PASS
+- test_mysql_schema_review.py: PASS
+- test_mysql_sql_compat.py: PASS
+- test_v16_08_admin_security.py: PASS
+- main_mysql_candidate_v15_76.py: PASS
+- safe_migrate_to_candidate.py: PASS
+- test_embedded_js_warning_cleanup.py: PASS
+- mysql_test_runner_common.py: PASS
+- mysql_pre_final_audit.py: PASS
+- mysql_runtime_adapter.py: PASS
+- test_migration_path_map.py: PASS
+- test_main_mysql_runtime_integration.py: PASS
+- test_mysql_main_static_audit.py: PASS
+- test_mysql_pre_final_audit.py: PASS
+- test_mysql_query_compat_audit.py: PASS
+- main.py: PASS
+- test_mysql_schema_index_coverage.py: PASS
+- mysql_runtime_compat_audit.py: PASS
+- test_mysql_deployment_profiles.py: PASS
+- mysql_deployment_preflight.py: PASS
+- document_tools.py: PASS
+- test_mysql_repository.py: PASS
+- safe_migrate_sqlite_to_mysql.py: PASS
+- mysql_schema_index_audit.py: PASS
+- migration_path_map.py: PASS
+- main_mysql_candidate_v15_79.py: PASS
+- test_activation_flow.py: PASS
+- test_mysql_secure_config.py: PASS
+- test_mysql_test_runner.py: PASS
+- mysql_deployment_profiles.py: PASS
+- archive_repository.py: PASS
+- reset_admin_password.py: PASS
+- test_mysql_sql_inventory.py: PASS
+- smoke_test_sqlite_isolated.py: PASS
+- mysql_index_sync.py: PASS
+- mysql_migration_gate.py: PASS
+- test_v16_09_user_management.py: PASS
+- test_mysql_migration_gate.py: PASS
+- configure_mysql_profiles.py: PASS
+- test_mysql_runtime_adapter.py: PASS
+- repository_contract.py: PASS
+- test_archive_repository.py: PASS
+- backup_restore.py: PASS
+- test_v16_11_enhanced_fields_and_merge.py: PASS
+- test_safe_migrate_to_candidate.py: PASS
+- mysql_main_static_audit.py: PASS
+- mysql_schema_manager.py: PASS
+- mysql_live_integration_test.py: PASS
+- test_mysql_schema_manager.py: PASS
+- mysql_secure_config.py: PASS
+- run_mysql_integration.py: PASS
+- mysql_safety.py: PASS
+
+Structural checks:
+- top search input: PASS
+- sidebar user profile: PASS
+- three-column council workspace CSS: PASS
+- council preview toolbar: PASS
+- archive field analysis route: PASS
+- admin users management route: PASS
+
+مهم: هذه فحوص صياغة وسلامة وبنية CSS/HTML وليست اختباراً بصرياً على Windows. لم يتم اختبار LM Studio أو Canon أو قاعدة MySQL الحية. يلزم اختبار التشغيل على جهاز المستخدم قبل اعتماد النسخة النهائية.
+
+اختبارات الوحدة المنفذة في هذه البيئة: 23 اختباراً ناجحاً (إدارة المسؤول، المستخدمون، معالجة الحقول، الدمج والميزات السابقة).
+ملاحظة: الاختبارات الآلية لا تعادل تجربة واجهة على Windows ولا تثبت اتصال الأجهزة المحلية.

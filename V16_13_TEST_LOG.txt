@@ -1,0 +1,18 @@
+test_council_metadata_panel_closes_before_workspace (test_v16_13_layout_and_autofill.V1613LayoutAndAutofillTests.test_council_metadata_panel_closes_before_workspace) ... ok
+test_first_pass_suggestion_normalized_and_bounded_retry_exists (test_v16_13_layout_and_autofill.V1613LayoutAndAutofillTests.test_first_pass_suggestion_normalized_and_bounded_retry_exists) ... ok
+test_no_fabricated_date_or_number_on_empty_text (test_v16_13_layout_and_autofill.V1613LayoutAndAutofillTests.test_no_fabricated_date_or_number_on_empty_text) ... ok
+test_realistic_arabic_fields_fallback (test_v16_13_layout_and_autofill.V1613LayoutAndAutofillTests.test_realistic_arabic_fields_fallback) ... ok
+test_scan_form_does_not_invent_today_as_document_date (test_v16_13_layout_and_autofill.V1613LayoutAndAutofillTests.test_scan_form_does_not_invent_today_as_document_date) ... ok
+test_arabic_number_date_subject_and_department (test_v16_10_field_fallbacks.FieldFallbackTests.test_arabic_number_date_subject_and_department) ... ok
+test_model_fields_are_preserved (test_v16_10_field_fallbacks.FieldFallbackTests.test_model_fields_are_preserved) ... ok
+test_no_guessing_when_text_empty (test_v16_10_field_fallbacks.FieldFallbackTests.test_no_guessing_when_text_empty) ... ok
+test_council_preview_controls_and_compact_save_present (test_v16_11_enhanced_fields_and_merge.V1611EnhancedFieldsAndMergeTests.test_council_preview_controls_and_compact_save_present) ... ok
+test_empty_text_does_not_invent_number_or_date (test_v16_11_enhanced_fields_and_merge.V1611EnhancedFieldsAndMergeTests.test_empty_text_does_not_invent_number_or_date) ... ok
+test_incoming_fields_summary_keywords_and_names (test_v16_11_enhanced_fields_and_merge.V1611EnhancedFieldsAndMergeTests.test_incoming_fields_summary_keywords_and_names) ... ok
+test_outgoing_issuer_is_local_directorate_and_recipient_is_preserved (test_v16_11_enhanced_fields_and_merge.V1611EnhancedFieldsAndMergeTests.test_outgoing_issuer_is_local_directorate_and_recipient_is_preserved) ... ok
+test_pdf_plus_image_merge_is_four_pages_and_preserves_sources (test_v16_11_enhanced_fields_and_merge.V1611EnhancedFieldsAndMergeTests.test_pdf_plus_image_merge_is_four_pages_and_preserves_sources) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.053s
+
+OK

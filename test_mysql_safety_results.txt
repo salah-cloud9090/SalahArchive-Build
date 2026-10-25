@@ -1,0 +1,5 @@
+PASS test_test_database_allowed
+PASS test_original_database_blocked_case_insensitive
+PASS test_other_database_blocked
+3/3 isolated helper unit tests passed; no MySQL connection made.
+IMPORTANT: mysql_safety.py is not integrated into signed main.py in this package.

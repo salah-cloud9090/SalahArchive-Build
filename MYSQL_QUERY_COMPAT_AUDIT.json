@@ -1,0 +1,1174 @@
+{
+  "scope": "Static literal-string audit only; dynamic SQL, runtime parameter values, and database behavior are not tested.",
+  "statement_count": 166,
+  "status_counts": {
+    "blocked": 9,
+    "translated_candidate": 153,
+    "dynamic_review_required": 4
+  },
+  "blocked_count": 9,
+  "findings": [
+    {
+      "line": 105,
+      "method": "execute",
+      "sql": "PRAGMA foreign_keys=ON",
+      "status": "blocked",
+      "reason": "PRAGMA is SQLite-only; replace with explicit MySQL connection/session logic"
+    },
+    {
+      "line": 106,
+      "method": "execute",
+      "sql": "PRAGMA busy_timeout=60000",
+      "status": "blocked",
+      "reason": "PRAGMA is SQLite-only; replace with explicit MySQL connection/session logic"
+    },
+    {
+      "line": 116,
+      "method": "execute",
+      "sql": "INSERT INTO local_audit(username,action,document_id,details) VALUES(?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_audit(username,action,document_id,details) VALUES(%s,%s,%s,%s)"
+    },
+    {
+      "line": 121,
+      "method": "execute",
+      "sql": "PRAGMA journal_mode=WAL",
+      "status": "blocked",
+      "reason": "PRAGMA is SQLite-only; replace with explicit MySQL connection/session logic"
+    },
+    {
+      "line": 122,
+      "method": "execute",
+      "sql": "PRAGMA synchronous=NORMAL",
+      "status": "blocked",
+      "reason": "PRAGMA is SQLite-only; replace with explicit MySQL connection/session logic"
+    },
+    {
+      "line": 123,
+      "method": "executescript",
+      "status": "blocked",
+      "reason": "executescript must be replaced by the reviewed MySQL schema manager",
+      "sql": "SCHEMA"
+    },
+    {
+      "line": 126,
+      "method": "execute",
+      "sql": "SELECT x.id AS link_id,x.case_id,i.* FROM local_case_inbox_links x JOIN scan_inbox i ON i.id=x.inbox_id ORDER BY x.id",
+      "status": "translated_candidate",
+      "translated": "SELECT x.id AS link_id,x.case_id,i.* FROM local_case_inbox_links x JOIN scan_inbox i ON i.id=x.inbox_id ORDER BY x.id"
+    },
+    {
+      "line": 134,
+      "method": "execute",
+      "sql": "INSERT INTO local_case_attachments(case_id,original_name,stored_name,mime_type,file_size,notes,added_by) VALUES(?,?,?,?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_case_attachments(case_id,original_name,stored_name,mime_type,file_size,notes,added_by) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+    },
+    {
+      "line": 136,
+      "method": "execute",
+      "sql": "INSERT INTO local_case_events(case_id,event_type,details,created_by) VALUES(?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_case_events(case_id,event_type,details,created_by) VALUES(%s,%s,%s,%s)"
+    },
+    {
+      "line": 146,
+      "method": "execute",
+      "sql": "DELETE FROM local_case_inbox_links WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "DELETE FROM local_case_inbox_links WHERE id=%s"
+    },
+    {
+      "line": 148,
+      "method": "execute",
+      "sql": "PRAGMA table_info(scan_baskets)",
+      "status": "blocked",
+      "reason": "PRAGMA is SQLite-only; replace with explicit MySQL connection/session logic"
+    },
+    {
+      "line": 149,
+      "method": "execute",
+      "sql": "ALTER TABLE scan_baskets ADD COLUMN is_active INTEGER NOT NULL DEFAULT 1",
+      "status": "translated_candidate",
+      "translated": "ALTER TABLE scan_baskets ADD COLUMN is_active INTEGER NOT NULL DEFAULT 1"
+    },
+    {
+      "line": 150,
+      "method": "execute",
+      "sql": "INSERT OR IGNORE INTO local_cabinets(name,description) VALUES('الأرشيف العام','خزانة المستندات المحلية')",
+      "status": "translated_candidate",
+      "translated": "INSERT IGNORE INTO local_cabinets(name,description) VALUES('الأرشيف العام','خزانة المستندات المحلية')"
+    },
+    {
+      "line": 151,
+      "method": "execute",
+      "sql": "INSERT OR IGNORE INTO local_cabinets(name,description) VALUES('الوارد','الكتب والمعاملات الواردة')",
+      "status": "translated_candidate",
+      "translated": "INSERT IGNORE INTO local_cabinets(name,description) VALUES('الوارد','الكتب والمعاملات الواردة')"
+    },
+    {
+      "line": 152,
+      "method": "execute",
+      "sql": "INSERT OR IGNORE INTO local_cabinets(name,description) VALUES('الصادر','الكتب والمعاملات الصادرة')",
+      "status": "translated_candidate",
+      "translated": "INSERT IGNORE INTO local_cabinets(name,description) VALUES('الصادر','الكتب والمعاملات الصادرة')"
+    },
+    {
+      "line": 153,
+      "method": "execute",
+      "sql": "INSERT OR IGNORE INTO local_cabinets(name,description) VALUES('القانونية','خزانة كتب ومرفقات القسم القانوني')",
+      "status": "translated_candidate",
+      "translated": "INSERT IGNORE INTO local_cabinets(name,description) VALUES('القانونية','خزانة كتب ومرفقات القسم القانوني')"
+    },
+    {
+      "line": 154,
+      "method": "execute",
+      "sql": "INSERT OR IGNORE INTO local_cabinets(name,description) VALUES('المجالس التحقيقية','خزانة ملفات المجالس التحقيقية المنجزة وغير المنجزة')",
+      "status": "translated_candidate",
+      "translated": "INSERT IGNORE INTO local_cabinets(name,description) VALUES('المجالس التحقيقية','خزانة ملفات المجالس التحقيقية المنجزة وغير المنجزة')"
+    },
+    {
+      "line": 155,
+      "method": "execute",
+      "sql": "INSERT OR IGNORE INTO scan_baskets(name,description,default_doc_type,cabinet_id) SELECT 'سلة القانونية','كتب ومرفقات القسم القانوني','other',id FROM local_cabinets WHERE name='القانونية'",
+      "status": "translated_candidate",
+      "translated": "INSERT IGNORE INTO scan_baskets(name,description,default_doc_type,cabinet_id) SELECT 'سلة القانونية','كتب ومرفقات القسم القانوني','other',id FROM local_cabinets WHERE name='القانونية'"
+    },
+    {
+      "line": 156,
+      "method": "execute",
+      "sql": "INSERT OR IGNORE INTO scan_baskets(name,description,default_doc_type,cabinet_id) SELECT 'سلة المجالس التحقيقية','ملفات المجالس التحقيقية المنجزة وغير المنجزة','other',id FROM local_cabinets WHERE name='المجالس التحقيقية'",
+      "status": "translated_candidate",
+      "translated": "INSERT IGNORE INTO scan_baskets(name,description,default_doc_type,cabinet_id) SELECT 'سلة المجالس التحقيقية','ملفات المجالس التحقيقية المنجزة وغير المنجزة','other',id FROM local_cabinets WHERE name='المجالس التحقيقية'"
+    },
+    {
+      "line": 157,
+      "method": "execute",
+      "sql": "INSERT OR IGNORE INTO scan_baskets(name,description,default_doc_type) VALUES('سلة الوارد','مسح الكتب الواردة','incoming')",
+      "status": "translated_candidate",
+      "translated": "INSERT IGNORE INTO scan_baskets(name,description,default_doc_type) VALUES('سلة الوارد','مسح الكتب الواردة','incoming')"
+    },
+    {
+      "line": 158,
+      "method": "execute",
+      "sql": "INSERT OR IGNORE INTO scan_baskets(name,description,default_doc_type) VALUES('سلة الصادر','مسح الكتب الصادرة','outgoing')",
+      "status": "translated_candidate",
+      "translated": "INSERT IGNORE INTO scan_baskets(name,description,default_doc_type) VALUES('سلة الصادر','مسح الكتب الصادرة','outgoing')"
+    },
+    {
+      "line": 159,
+      "method": "execute",
+      "sql": "INSERT OR IGNORE INTO scan_baskets(name,description,default_doc_type) VALUES('سلة المراجعة','مستندات بانتظار التصنيف','other')",
+      "status": "translated_candidate",
+      "translated": "INSERT IGNORE INTO scan_baskets(name,description,default_doc_type) VALUES('سلة المراجعة','مستندات بانتظار التصنيف','other')"
+    },
+    {
+      "line": 160,
+      "method": "execute",
+      "sql": "SELECT COUNT(*) n FROM local_users",
+      "status": "translated_candidate",
+      "translated": "SELECT COUNT(*) n FROM local_users"
+    },
+    {
+      "line": 164,
+      "method": "execute",
+      "sql": "INSERT INTO local_users(username,password_salt,password_hash,role) VALUES(?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_users(username,password_salt,password_hash,role) VALUES(%s,%s,%s,%s)"
+    },
+    {
+      "line": 173,
+      "method": "execute",
+      "sql": "SELECT * FROM local_users WHERE username=? AND is_active=1",
+      "status": "translated_candidate",
+      "translated": "SELECT * FROM local_users WHERE username=%s AND is_active=1"
+    },
+    {
+      "line": 728,
+      "method": "execute",
+      "sql": "SELECT * FROM scan_inbox WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT * FROM scan_inbox WHERE id=%s"
+    },
+    {
+      "line": 758,
+      "method": "execute",
+      "sql": "SELECT * FROM scan_inbox WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT * FROM scan_inbox WHERE id=%s"
+    },
+    {
+      "line": 796,
+      "method": "execute",
+      "sql": "SELECT * FROM scan_inbox WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT * FROM scan_inbox WHERE id=%s"
+    },
+    {
+      "line": 821,
+      "method": "execute",
+      "sql": "SELECT * FROM scan_inbox WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT * FROM scan_inbox WHERE id=%s"
+    },
+    {
+      "line": 839,
+      "method": "execute",
+      "sql": "SELECT * FROM local_case_attachments WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT * FROM local_case_attachments WHERE id=%s"
+    },
+    {
+      "line": 847,
+      "method": "execute",
+      "sql": "SELECT * FROM local_documents WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT * FROM local_documents WHERE id=%s"
+    },
+    {
+      "line": 918,
+      "method": "execute",
+      "sql": "SELECT id FROM local_documents WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT id FROM local_documents WHERE id=%s"
+    },
+    {
+      "line": 922,
+      "method": "execute",
+      "sql": "SELECT id FROM local_document_fields WHERE document_id=? AND field_name=?",
+      "status": "translated_candidate",
+      "translated": "SELECT id FROM local_document_fields WHERE document_id=%s AND field_name=%s"
+    },
+    {
+      "line": 923,
+      "method": "execute",
+      "sql": "UPDATE local_document_fields SET field_value=? WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "UPDATE local_document_fields SET field_value=%s WHERE id=%s"
+    },
+    {
+      "line": 924,
+      "method": "execute",
+      "sql": "INSERT INTO local_document_fields(document_id,field_name,field_value) VALUES(?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_document_fields(document_id,field_name,field_value) VALUES(%s,%s,%s)"
+    },
+    {
+      "line": 930,
+      "method": "execute",
+      "sql": "SELECT doc_type,COUNT(*) n FROM local_documents GROUP BY doc_type",
+      "status": "translated_candidate",
+      "translated": "SELECT doc_type,COUNT(*) n FROM local_documents GROUP BY doc_type"
+    },
+    {
+      "line": 931,
+      "method": "execute",
+      "sql": "SELECT COUNT(*) n FROM local_documents",
+      "status": "translated_candidate",
+      "translated": "SELECT COUNT(*) n FROM local_documents"
+    },
+    {
+      "line": 932,
+      "method": "execute",
+      "sql": "SELECT COUNT(*) n FROM local_cabinets",
+      "status": "translated_candidate",
+      "translated": "SELECT COUNT(*) n FROM local_cabinets"
+    },
+    {
+      "line": 935,
+      "method": "execute",
+      "sql": "SELECT d.*,c.name cabinet FROM local_documents d JOIN local_cabinets c ON c.id=d.cabinet_id WHERE d.document_number LIKE ? OR d.subject LIKE ? OR d.sender_recipient LIKE ? OR d.employee_name LIKE ? OR d.keywords LIKE ? OR d.notes LIKE ? ORDER BY d.id DESC LIMIT 300",
+      "status": "translated_candidate",
+      "translated": "SELECT d.*,c.name cabinet FROM local_documents d JOIN local_cabinets c ON c.id=d.cabinet_id WHERE d.document_number LIKE %s OR d.subject LIKE %s OR d.sender_recipient LIKE %s OR d.employee_name LIKE %s OR d.keywords LIKE %s OR d.notes LIKE %s ORDER BY d.id DESC LIMIT 300"
+    },
+    {
+      "line": 937,
+      "method": "execute",
+      "sql": "SELECT d.*,c.name cabinet FROM local_documents d JOIN local_cabinets c ON c.id=d.cabinet_id ORDER BY d.id DESC LIMIT 100",
+      "status": "translated_candidate",
+      "translated": "SELECT d.*,c.name cabinet FROM local_documents d JOIN local_cabinets c ON c.id=d.cabinet_id ORDER BY d.id DESC LIMIT 100"
+    },
+    {
+      "line": 938,
+      "method": "execute",
+      "sql": "SELECT id,name FROM local_cabinets ORDER BY name",
+      "status": "translated_candidate",
+      "translated": "SELECT id,name FROM local_cabinets ORDER BY name"
+    },
+    {
+      "line": 956,
+      "method": "execute",
+      "sql": "SELECT i.*,b.default_doc_type,b.cabinet_id FROM scan_inbox i JOIN scan_baskets b ON b.id=i.basket_id WHERE i.id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT i.*,b.default_doc_type,b.cabinet_id FROM scan_inbox i JOIN scan_baskets b ON b.id=i.basket_id WHERE i.id=%s"
+    },
+    {
+      "line": 961,
+      "method": "execute",
+      "sql": "SELECT i.*,b.default_doc_type,b.cabinet_id FROM scan_inbox i JOIN scan_baskets b ON b.id=i.basket_id WHERE i.id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT i.*,b.default_doc_type,b.cabinet_id FROM scan_inbox i JOIN scan_baskets b ON b.id=i.basket_id WHERE i.id=%s"
+    },
+    {
+      "line": 990,
+      "method": "execute",
+      "sql": "SELECT id,name FROM local_cabinets ORDER BY name",
+      "status": "translated_candidate",
+      "translated": "SELECT id,name FROM local_cabinets ORDER BY name"
+    },
+    {
+      "line": 994,
+      "method": "execute",
+      "status": "dynamic_review_required",
+      "reason": "SQL expression is not a literal constant; inspect the constructed query at runtime",
+      "sql": "sql"
+    },
+    {
+      "line": 1104,
+      "method": "execute",
+      "sql": "SELECT * FROM scan_inbox WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT * FROM scan_inbox WHERE id=%s"
+    },
+    {
+      "line": 1133,
+      "method": "execute",
+      "sql": "SELECT id FROM local_cabinets WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT id FROM local_cabinets WHERE id=%s"
+    },
+    {
+      "line": 1135,
+      "method": "execute",
+      "sql": "SELECT id FROM local_documents WHERE sha256=?",
+      "status": "translated_candidate",
+      "translated": "SELECT id FROM local_documents WHERE sha256=%s"
+    },
+    {
+      "line": 1146,
+      "method": "execute",
+      "sql": "INSERT INTO local_documents(cabinet_id,doc_type,document_number,document_date,subject,sender_recipient,employee_name,keywords,notes,original_name,stored_name,mime_type,file_size,sha256,created_by) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_documents(cabinet_id,doc_type,document_number,document_date,subject,sender_recipient,employee_name,keywords,notes,original_name,stored_name,mime_type,file_size,sha256,created_by) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    },
+    {
+      "line": 1151,
+      "method": "execute",
+      "sql": "INSERT INTO local_document_fields(document_id,field_name,field_value) VALUES(?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_document_fields(document_id,field_name,field_value) VALUES(%s,%s,%s)"
+    },
+    {
+      "line": 1153,
+      "method": "execute",
+      "sql": "UPDATE local_documents SET sender_recipient=? WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "UPDATE local_documents SET sender_recipient=%s WHERE id=%s"
+    },
+    {
+      "line": 1159,
+      "method": "execute",
+      "sql": "INSERT INTO local_audit(username,action,document_id,details) VALUES(?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_audit(username,action,document_id,details) VALUES(%s,%s,%s,%s)"
+    },
+    {
+      "line": 1160,
+      "method": "execute",
+      "sql": "UPDATE scan_inbox SET status='archived' WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "UPDATE scan_inbox SET status='archived' WHERE id=%s"
+    },
+    {
+      "line": 1175,
+      "method": "execute",
+      "sql": "SELECT d.*,c.name cabinet FROM local_documents d JOIN local_cabinets c ON c.id=d.cabinet_id WHERE d.id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT d.*,c.name cabinet FROM local_documents d JOIN local_cabinets c ON c.id=d.cabinet_id WHERE d.id=%s"
+    },
+    {
+      "line": 1177,
+      "method": "execute",
+      "sql": "SELECT field_name,field_value FROM local_document_fields WHERE document_id=? ORDER BY field_name",
+      "status": "translated_candidate",
+      "translated": "SELECT field_name,field_value FROM local_document_fields WHERE document_id=%s ORDER BY field_name"
+    },
+    {
+      "line": 1202,
+      "method": "execute",
+      "sql": "SELECT * FROM local_documents WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT * FROM local_documents WHERE id=%s"
+    },
+    {
+      "line": 1212,
+      "method": "execute",
+      "sql": "CREATE TABLE IF NOT EXISTS scan_inbox_groups (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, basket_id INTEGER NOT NULL, created_by TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)",
+      "status": "blocked",
+      "reason": "AUTOINCREMENT is schema syntax and requires a reviewed MySQL DDL migration"
+    },
+    {
+      "line": 1213,
+      "method": "execute",
+      "sql": "CREATE TABLE IF NOT EXISTS scan_inbox_group_items (group_id INTEGER NOT NULL, inbox_id INTEGER NOT NULL UNIQUE, PRIMARY KEY(group_id,inbox_id))",
+      "status": "translated_candidate",
+      "translated": "CREATE TABLE IF NOT EXISTS scan_inbox_group_items (group_id INTEGER NOT NULL, inbox_id INTEGER NOT NULL UNIQUE, PRIMARY KEY(group_id,inbox_id))"
+    },
+    {
+      "line": 1214,
+      "method": "execute",
+      "sql": "SELECT * FROM scan_baskets WHERE is_active=1 ORDER BY id",
+      "status": "translated_candidate",
+      "translated": "SELECT * FROM scan_baskets WHERE is_active=1 ORDER BY id"
+    },
+    {
+      "line": 1215,
+      "method": "execute",
+      "sql": "SELECT i.*,b.name basket,g.name AS group_name FROM scan_inbox i JOIN scan_baskets b ON b.id=i.basket_id LEFT JOIN scan_inbox_group_items gi ON gi.inbox_id=i.id LEFT JOIN scan_inbox_groups g ON g.id=gi.group_id WHERE i.status!='archived' ORDER BY i.id DESC LIMIT 100",
+      "status": "translated_candidate",
+      "translated": "SELECT i.*,b.name basket,g.name AS group_name FROM scan_inbox i JOIN scan_baskets b ON b.id=i.basket_id LEFT JOIN scan_inbox_group_items gi ON gi.inbox_id=i.id LEFT JOIN scan_inbox_groups g ON g.id=gi.group_id WHERE i.status!='archived' ORDER BY i.id DESC LIMIT 100"
+    },
+    {
+      "line": 1216,
+      "method": "execute",
+      "sql": "SELECT i.*,b.name basket FROM scan_inbox i JOIN scan_baskets b ON b.id=i.basket_id WHERE i.status='archived' ORDER BY i.id DESC LIMIT 50",
+      "status": "translated_candidate",
+      "translated": "SELECT i.*,b.name basket FROM scan_inbox i JOIN scan_baskets b ON b.id=i.basket_id WHERE i.status='archived' ORDER BY i.id DESC LIMIT 50"
+    },
+    {
+      "line": 1217,
+      "method": "execute",
+      "sql": "SELECT id,name FROM local_cabinets ORDER BY name",
+      "status": "translated_candidate",
+      "translated": "SELECT id,name FROM local_cabinets ORDER BY name"
+    },
+    {
+      "line": 1260,
+      "method": "execute",
+      "sql": "SELECT b.*, (SELECT COUNT(*) FROM scan_inbox i WHERE i.basket_id=b.id) file_count FROM scan_baskets b ORDER BY b.id",
+      "status": "translated_candidate",
+      "translated": "SELECT b.*, (SELECT COUNT(*) FROM scan_inbox i WHERE i.basket_id=b.id) file_count FROM scan_baskets b ORDER BY b.id"
+    },
+    {
+      "line": 1261,
+      "method": "execute",
+      "sql": "SELECT id,name FROM local_cabinets ORDER BY name",
+      "status": "translated_candidate",
+      "translated": "SELECT id,name FROM local_cabinets ORDER BY name"
+    },
+    {
+      "line": 1281,
+      "method": "execute",
+      "sql": "UPDATE scan_baskets SET name=?,description=?,default_doc_type=?,is_active=?,cabinet_id=? WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "UPDATE scan_baskets SET name=%s,description=%s,default_doc_type=%s,is_active=%s,cabinet_id=%s WHERE id=%s"
+    },
+    {
+      "line": 1291,
+      "method": "execute",
+      "sql": "SELECT COUNT(*) FROM scan_inbox WHERE basket_id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT COUNT(*) FROM scan_inbox WHERE basket_id=%s"
+    },
+    {
+      "line": 1293,
+      "method": "execute",
+      "sql": "DELETE FROM scan_baskets WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "DELETE FROM scan_baskets WHERE id=%s"
+    },
+    {
+      "line": 1299,
+      "method": "execute",
+      "sql": "SELECT * FROM local_cases WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT * FROM local_cases WHERE id=%s"
+    },
+    {
+      "line": 1301,
+      "method": "execute",
+      "sql": "SELECT d.* FROM local_case_documents x JOIN local_documents d ON d.id=x.document_id WHERE x.case_id=? ORDER BY x.id DESC",
+      "status": "translated_candidate",
+      "translated": "SELECT d.* FROM local_case_documents x JOIN local_documents d ON d.id=x.document_id WHERE x.case_id=%s ORDER BY x.id DESC"
+    },
+    {
+      "line": 1302,
+      "method": "execute",
+      "sql": "SELECT id,document_number,subject,original_name,document_date FROM local_documents ORDER BY id DESC LIMIT 1000",
+      "status": "translated_candidate",
+      "translated": "SELECT id,document_number,subject,original_name,document_date FROM local_documents ORDER BY id DESC LIMIT 1000"
+    },
+    {
+      "line": 1303,
+      "method": "execute",
+      "sql": "SELECT * FROM local_case_attachments WHERE case_id=? ORDER BY id DESC",
+      "status": "translated_candidate",
+      "translated": "SELECT * FROM local_case_attachments WHERE case_id=%s ORDER BY id DESC"
+    },
+    {
+      "line": 1304,
+      "method": "execute",
+      "sql": "SELECT i.*,b.name AS basket_name,x.linked_at FROM local_case_inbox_links x JOIN scan_inbox i ON i.id=x.inbox_id JOIN scan_baskets b ON b.id=i.basket_id WHERE x.case_id=? ORDER BY x.id DESC",
+      "status": "translated_candidate",
+      "translated": "SELECT i.*,b.name AS basket_name,x.linked_at FROM local_case_inbox_links x JOIN scan_inbox i ON i.id=x.inbox_id JOIN scan_baskets b ON b.id=i.basket_id WHERE x.case_id=%s ORDER BY x.id DESC"
+    },
+    {
+      "line": 1305,
+      "method": "execute",
+      "sql": "SELECT i.id,i.original_name,b.name AS basket_name,i.status FROM scan_inbox i JOIN scan_baskets b ON b.id=i.basket_id WHERE i.status!='archived' ORDER BY i.id DESC LIMIT 1000",
+      "status": "translated_candidate",
+      "translated": "SELECT i.id,i.original_name,b.name AS basket_name,i.status FROM scan_inbox i JOIN scan_baskets b ON b.id=i.basket_id WHERE i.status!='archived' ORDER BY i.id DESC LIMIT 1000"
+    },
+    {
+      "line": 1306,
+      "method": "execute",
+      "sql": "SELECT * FROM local_case_events WHERE case_id=? ORDER BY id DESC",
+      "status": "translated_candidate",
+      "translated": "SELECT * FROM local_case_events WHERE case_id=%s ORDER BY id DESC"
+    },
+    {
+      "line": 1334,
+      "method": "execute",
+      "sql": "SELECT * FROM local_cases WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT * FROM local_cases WHERE id=%s"
+    },
+    {
+      "line": 1390,
+      "method": "execute",
+      "sql": "SELECT case_number FROM local_cases WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT case_number FROM local_cases WHERE id=%s"
+    },
+    {
+      "line": 1393,
+      "method": "execute",
+      "sql": "UPDATE local_cases SET case_number=?,title=?,case_type=?,status=?,priority=?,owner_department=?,assigned_to=?,due_date=?,notes=?,updated_at=datetime('now') WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "UPDATE local_cases SET case_number=%s,title=%s,case_type=%s,status=%s,priority=%s,owner_department=%s,assigned_to=%s,due_date=%s,notes=%s,updated_at=CURRENT_TIMESTAMP WHERE id=%s"
+    },
+    {
+      "line": 1396,
+      "method": "execute",
+      "sql": "INSERT INTO local_case_events(case_id,event_type,details,created_by) VALUES(?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_case_events(case_id,event_type,details,created_by) VALUES(%s,%s,%s,%s)"
+    },
+    {
+      "line": 1407,
+      "method": "execute",
+      "sql": "INSERT OR IGNORE INTO local_case_documents(case_id,document_id,linked_by) VALUES(?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT IGNORE INTO local_case_documents(case_id,document_id,linked_by) VALUES(%s,%s,%s)"
+    },
+    {
+      "line": 1408,
+      "method": "execute",
+      "sql": "INSERT INTO local_case_events(case_id,event_type,details,created_by) VALUES(?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_case_events(case_id,event_type,details,created_by) VALUES(%s,%s,%s,%s)"
+    },
+    {
+      "line": 1419,
+      "method": "execute",
+      "sql": "SELECT id FROM local_cases WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT id FROM local_cases WHERE id=%s"
+    },
+    {
+      "line": 1420,
+      "method": "execute",
+      "sql": "SELECT * FROM scan_inbox WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT * FROM scan_inbox WHERE id=%s"
+    },
+    {
+      "line": 1427,
+      "method": "execute",
+      "sql": "INSERT INTO local_case_attachments(case_id,original_name,stored_name,mime_type,file_size,notes,added_by) VALUES(?,?,?,?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_case_attachments(case_id,original_name,stored_name,mime_type,file_size,notes,added_by) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+    },
+    {
+      "line": 1429,
+      "method": "execute",
+      "sql": "INSERT INTO local_case_events(case_id,event_type,details,created_by) VALUES(?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_case_events(case_id,event_type,details,created_by) VALUES(%s,%s,%s,%s)"
+    },
+    {
+      "line": 1443,
+      "method": "execute",
+      "sql": "SELECT id FROM local_cases WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT id FROM local_cases WHERE id=%s"
+    },
+    {
+      "line": 1445,
+      "method": "execute",
+      "sql": "INSERT INTO local_case_attachments(case_id,original_name,stored_name,mime_type,file_size,notes,added_by) VALUES(?,?,?,?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_case_attachments(case_id,original_name,stored_name,mime_type,file_size,notes,added_by) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+    },
+    {
+      "line": 1446,
+      "method": "execute",
+      "sql": "INSERT INTO local_case_events(case_id,event_type,details,created_by) VALUES(?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_case_events(case_id,event_type,details,created_by) VALUES(%s,%s,%s,%s)"
+    },
+    {
+      "line": 1456,
+      "method": "execute",
+      "sql": "INSERT INTO scan_baskets(name,description,cabinet_id,default_doc_type,created_by) VALUES(?,?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO scan_baskets(name,description,cabinet_id,default_doc_type,created_by) VALUES(%s,%s,%s,%s,%s)"
+    },
+    {
+      "line": 1486,
+      "method": "execute",
+      "sql": "SELECT id,name FROM scan_baskets WHERE id=? AND is_active=1",
+      "status": "translated_candidate",
+      "translated": "SELECT id,name FROM scan_baskets WHERE id=%s AND is_active=1"
+    },
+    {
+      "line": 1488,
+      "method": "execute",
+      "sql": "CREATE TABLE IF NOT EXISTS scan_inbox_groups (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, basket_id INTEGER NOT NULL, created_by TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)",
+      "status": "blocked",
+      "reason": "AUTOINCREMENT is schema syntax and requires a reviewed MySQL DDL migration"
+    },
+    {
+      "line": 1489,
+      "method": "execute",
+      "sql": "CREATE TABLE IF NOT EXISTS scan_inbox_group_items (group_id INTEGER NOT NULL, inbox_id INTEGER NOT NULL UNIQUE, PRIMARY KEY(group_id,inbox_id))",
+      "status": "translated_candidate",
+      "translated": "CREATE TABLE IF NOT EXISTS scan_inbox_group_items (group_id INTEGER NOT NULL, inbox_id INTEGER NOT NULL UNIQUE, PRIMARY KEY(group_id,inbox_id))"
+    },
+    {
+      "line": 1496,
+      "method": "execute",
+      "sql": "SELECT id FROM scan_inbox WHERE sha256=?",
+      "status": "translated_candidate",
+      "translated": "SELECT id FROM scan_inbox WHERE sha256=%s"
+    },
+    {
+      "line": 1501,
+      "method": "execute",
+      "sql": "INSERT INTO scan_inbox(basket_id,original_name,stored_name,mime_type,file_size,sha256,created_by,status) VALUES(?,?,?,?,?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO scan_inbox(basket_id,original_name,stored_name,mime_type,file_size,sha256,created_by,status) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+    },
+    {
+      "line": 1504,
+      "method": "execute",
+      "sql": "INSERT INTO scan_inbox_groups(name,basket_id,created_by) VALUES(?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO scan_inbox_groups(name,basket_id,created_by) VALUES(%s,%s,%s)"
+    },
+    {
+      "line": 1505,
+      "method": "execute",
+      "sql": "INSERT INTO scan_inbox_group_items(group_id,inbox_id) VALUES(?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO scan_inbox_group_items(group_id,inbox_id) VALUES(%s,%s)"
+    },
+    {
+      "line": 1512,
+      "method": "execute",
+      "sql": "UPDATE scan_inbox SET status='processing' WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "UPDATE scan_inbox SET status='processing' WHERE id=%s"
+    },
+    {
+      "line": 1522,
+      "method": "execute",
+      "sql": "UPDATE scan_inbox SET status='needs_review', ai_suggestion=? WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "UPDATE scan_inbox SET status='needs_review', ai_suggestion=%s WHERE id=%s"
+    },
+    {
+      "line": 1546,
+      "method": "execute",
+      "sql": "SELECT * FROM scan_inbox WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT * FROM scan_inbox WHERE id=%s"
+    },
+    {
+      "line": 1552,
+      "method": "execute",
+      "sql": "SELECT x.id AS link_id,x.case_id,k.case_number FROM local_case_inbox_links x JOIN local_cases k ON k.id=x.case_id WHERE x.inbox_id=? ORDER BY x.id",
+      "status": "translated_candidate",
+      "translated": "SELECT x.id AS link_id,x.case_id,k.case_number FROM local_case_inbox_links x JOIN local_cases k ON k.id=x.case_id WHERE x.inbox_id=%s ORDER BY x.id"
+    },
+    {
+      "line": 1562,
+      "method": "execute",
+      "sql": "INSERT INTO local_case_attachments(case_id,original_name,stored_name,mime_type,file_size,notes,added_by) VALUES(?,?,?,?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_case_attachments(case_id,original_name,stored_name,mime_type,file_size,notes,added_by) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+    },
+    {
+      "line": 1564,
+      "method": "execute",
+      "sql": "INSERT INTO local_case_events(case_id,event_type,details,created_by) VALUES(?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_case_events(case_id,event_type,details,created_by) VALUES(%s,%s,%s,%s)"
+    },
+    {
+      "line": 1566,
+      "method": "execute",
+      "sql": "DELETE FROM local_case_inbox_links WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "DELETE FROM local_case_inbox_links WHERE id=%s"
+    },
+    {
+      "line": 1567,
+      "method": "execute",
+      "sql": "DELETE FROM scan_inbox_group_items WHERE inbox_id=?",
+      "status": "translated_candidate",
+      "translated": "DELETE FROM scan_inbox_group_items WHERE inbox_id=%s"
+    },
+    {
+      "line": 1568,
+      "method": "execute",
+      "sql": "DELETE FROM scan_inbox WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "DELETE FROM scan_inbox WHERE id=%s"
+    },
+    {
+      "line": 1576,
+      "method": "execute",
+      "sql": "CREATE TABLE IF NOT EXISTS scan_inbox_groups (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, basket_id INTEGER NOT NULL, created_by TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)",
+      "status": "blocked",
+      "reason": "AUTOINCREMENT is schema syntax and requires a reviewed MySQL DDL migration"
+    },
+    {
+      "line": 1577,
+      "method": "execute",
+      "sql": "CREATE TABLE IF NOT EXISTS scan_inbox_group_items (group_id INTEGER NOT NULL, inbox_id INTEGER NOT NULL UNIQUE, PRIMARY KEY(group_id,inbox_id))",
+      "status": "translated_candidate",
+      "translated": "CREATE TABLE IF NOT EXISTS scan_inbox_group_items (group_id INTEGER NOT NULL, inbox_id INTEGER NOT NULL UNIQUE, PRIMARY KEY(group_id,inbox_id))"
+    },
+    {
+      "line": 1588,
+      "method": "execute",
+      "status": "dynamic_review_required",
+      "reason": "SQL expression is not a literal constant; inspect the constructed query at runtime",
+      "sql": "f\"SELECT id,basket_id,status FROM scan_inbox WHERE id IN ({marks}) AND status!='archived'\""
+    },
+    {
+      "line": 1593,
+      "method": "execute",
+      "sql": "INSERT INTO scan_inbox_groups(name,basket_id,created_by) VALUES(?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO scan_inbox_groups(name,basket_id,created_by) VALUES(%s,%s,%s)"
+    },
+    {
+      "line": 1594,
+      "method": "execute",
+      "sql": "INSERT OR REPLACE INTO scan_inbox_group_items(group_id,inbox_id) VALUES(?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO scan_inbox_group_items(group_id,inbox_id) VALUES(%s,%s) ON DUPLICATE KEY UPDATE group_id=VALUES(group_id)"
+    },
+    {
+      "line": 1598,
+      "method": "execute",
+      "status": "dynamic_review_required",
+      "reason": "SQL expression is not a literal constant; inspect the constructed query at runtime",
+      "sql": "f'DELETE FROM scan_inbox_group_items WHERE inbox_id IN ({marks})'"
+    },
+    {
+      "line": 1599,
+      "method": "execute",
+      "sql": "DELETE FROM scan_inbox_groups WHERE id NOT IN (SELECT DISTINCT group_id FROM scan_inbox_group_items)",
+      "status": "translated_candidate",
+      "translated": "DELETE FROM scan_inbox_groups WHERE id NOT IN (SELECT DISTINCT group_id FROM scan_inbox_group_items)"
+    },
+    {
+      "line": 1619,
+      "method": "execute",
+      "sql": "SELECT id FROM scan_baskets WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT id FROM scan_baskets WHERE id=%s"
+    },
+    {
+      "line": 1620,
+      "method": "execute",
+      "sql": "SELECT id FROM scan_inbox WHERE sha256=?",
+      "status": "translated_candidate",
+      "translated": "SELECT id FROM scan_inbox WHERE sha256=%s"
+    },
+    {
+      "line": 1623,
+      "method": "execute",
+      "sql": "INSERT INTO scan_inbox(basket_id,original_name,stored_name,mime_type,file_size,sha256,created_by,status) VALUES(?,?,?,?,?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO scan_inbox(basket_id,original_name,stored_name,mime_type,file_size,sha256,created_by,status) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+    },
+    {
+      "line": 1626,
+      "method": "execute",
+      "sql": "UPDATE scan_inbox SET status='processing' WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "UPDATE scan_inbox SET status='processing' WHERE id=%s"
+    },
+    {
+      "line": 1659,
+      "method": "execute",
+      "sql": "SELECT * FROM scan_baskets WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT * FROM scan_baskets WHERE id=%s"
+    },
+    {
+      "line": 1679,
+      "method": "execute",
+      "sql": "SELECT id FROM scan_inbox WHERE sha256=?",
+      "status": "translated_candidate",
+      "translated": "SELECT id FROM scan_inbox WHERE sha256=%s"
+    },
+    {
+      "line": 1683,
+      "method": "execute",
+      "sql": "INSERT INTO scan_inbox(basket_id,original_name,stored_name,mime_type,file_size,sha256,created_by,status) VALUES(?,?,?,?,?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO scan_inbox(basket_id,original_name,stored_name,mime_type,file_size,sha256,created_by,status) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+    },
+    {
+      "line": 1691,
+      "method": "execute",
+      "sql": "UPDATE scan_inbox SET extracted_text=? WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "UPDATE scan_inbox SET extracted_text=%s WHERE id=%s"
+    },
+    {
+      "line": 1698,
+      "method": "execute",
+      "sql": "UPDATE scan_inbox SET ai_suggestion=?,status=? WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "UPDATE scan_inbox SET ai_suggestion=%s,status=%s WHERE id=%s"
+    },
+    {
+      "line": 1719,
+      "method": "execute",
+      "sql": "SELECT group_id FROM scan_inbox_group_items WHERE inbox_id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT group_id FROM scan_inbox_group_items WHERE inbox_id=%s"
+    },
+    {
+      "line": 1721,
+      "method": "execute",
+      "sql": "SELECT i.id,i.original_name,i.stored_name,i.extracted_text FROM scan_inbox i JOIN scan_inbox_group_items gi ON gi.inbox_id=i.id WHERE gi.group_id=? AND i.id<>? ORDER BY i.id",
+      "status": "translated_candidate",
+      "translated": "SELECT i.id,i.original_name,i.stored_name,i.extracted_text FROM scan_inbox i JOIN scan_inbox_group_items gi ON gi.inbox_id=i.id WHERE gi.group_id=%s AND i.id<>%s ORDER BY i.id"
+    },
+    {
+      "line": 1730,
+      "method": "execute",
+      "sql": "UPDATE scan_inbox SET extracted_text=? WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "UPDATE scan_inbox SET extracted_text=%s WHERE id=%s"
+    },
+    {
+      "line": 1741,
+      "method": "execute",
+      "sql": "SELECT status FROM scan_inbox WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT status FROM scan_inbox WHERE id=%s"
+    },
+    {
+      "line": 1743,
+      "method": "execute",
+      "sql": "UPDATE scan_inbox SET status=? WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "UPDATE scan_inbox SET status=%s WHERE id=%s"
+    },
+    {
+      "line": 1748,
+      "method": "execute",
+      "sql": "UPDATE scan_inbox SET status=?, ai_suggestion=? WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "UPDATE scan_inbox SET status=%s, ai_suggestion=%s WHERE id=%s"
+    },
+    {
+      "line": 1776,
+      "method": "execute",
+      "sql": "SELECT * FROM scan_inbox WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT * FROM scan_inbox WHERE id=%s"
+    },
+    {
+      "line": 1793,
+      "method": "execute",
+      "sql": "UPDATE scan_inbox SET extracted_text=?,ai_suggestion=?,status=? WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "UPDATE scan_inbox SET extracted_text=%s,ai_suggestion=%s,status=%s WHERE id=%s"
+    },
+    {
+      "line": 1799,
+      "method": "execute",
+      "sql": "UPDATE scan_inbox SET extracted_text=?,ai_suggestion=?,status=? WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "UPDATE scan_inbox SET extracted_text=%s,ai_suggestion=%s,status=%s WHERE id=%s"
+    },
+    {
+      "line": 1821,
+      "method": "execute",
+      "sql": "UPDATE scan_inbox SET extracted_text=?,ai_suggestion=?,status=? WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "UPDATE scan_inbox SET extracted_text=%s,ai_suggestion=%s,status=%s WHERE id=%s"
+    },
+    {
+      "line": 1828,
+      "method": "execute",
+      "sql": "UPDATE scan_inbox SET extracted_text=?,ai_suggestion=?,status=? WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "UPDATE scan_inbox SET extracted_text=%s,ai_suggestion=%s,status=%s WHERE id=%s"
+    },
+    {
+      "line": 1838,
+      "method": "execute",
+      "sql": "SELECT i.*,b.name basket FROM scan_inbox i JOIN scan_baskets b ON b.id=i.basket_id WHERE i.id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT i.*,b.name basket FROM scan_inbox i JOIN scan_baskets b ON b.id=i.basket_id WHERE i.id=%s"
+    },
+    {
+      "line": 1895,
+      "method": "execute",
+      "sql": "UPDATE scan_inbox SET extracted_text=?,ai_suggestion=?,status=? WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "UPDATE scan_inbox SET extracted_text=%s,ai_suggestion=%s,status=%s WHERE id=%s"
+    },
+    {
+      "line": 1929,
+      "method": "execute",
+      "sql": "CREATE TABLE IF NOT EXISTS scan_baskets (id BIGINT PRIMARY KEY, name VARCHAR(190) NOT NULL UNIQUE, description TEXT, default_doc_type VARCHAR(40), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP) CHARACTER SET utf8mb4",
+      "status": "translated_candidate",
+      "translated": "CREATE TABLE IF NOT EXISTS scan_baskets (id BIGINT PRIMARY KEY, name VARCHAR(190) NOT NULL UNIQUE, description TEXT, default_doc_type VARCHAR(40), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP) CHARACTER SET utf8mb4"
+    },
+    {
+      "line": 1930,
+      "method": "execute",
+      "sql": "CREATE TABLE IF NOT EXISTS scan_inbox (id BIGINT PRIMARY KEY, basket_id BIGINT NOT NULL, original_name VARCHAR(512) NOT NULL, sha256 CHAR(64) NOT NULL, status VARCHAR(32) NOT NULL, created_by VARCHAR(190), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, INDEX idx_scan_basket_status (basket_id,status)) CHARACTER SET utf8mb4",
+      "status": "translated_candidate",
+      "translated": "CREATE TABLE IF NOT EXISTS scan_inbox (id BIGINT PRIMARY KEY, basket_id BIGINT NOT NULL, original_name VARCHAR(512) NOT NULL, sha256 CHAR(64) NOT NULL, status VARCHAR(32) NOT NULL, created_by VARCHAR(190), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, INDEX idx_scan_basket_status (basket_id,status)) CHARACTER SET utf8mb4"
+    },
+    {
+      "line": 1931,
+      "method": "execute",
+      "sql": "CREATE TABLE IF NOT EXISTS archive_index (document_id BIGINT PRIMARY KEY, cabinet_id BIGINT, cabinet_name VARCHAR(255), doc_type VARCHAR(40), document_number VARCHAR(255), document_date VARCHAR(32), subject TEXT, sender_recipient TEXT, employee_name TEXT, keywords TEXT, notes LONGTEXT, original_name VARCHAR(1024), stored_name VARCHAR(255), mime_type VARCHAR(255), file_size BIGINT, sha256 CHAR(64), created_by VARCHAR(190), created_at VARCHAR(32), updated_at VARCHAR(32), indexed_at TIMESTAMP DEFAU",
+      "status": "translated_candidate",
+      "translated": "CREATE TABLE IF NOT EXISTS archive_index (document_id BIGINT PRIMARY KEY, cabinet_id BIGINT, cabinet_name VARCHAR(255), doc_type VARCHAR(40), document_number VARCHAR(255), document_date VARCHAR(32), subject TEXT, sender_recipient TEXT, employee_name TEXT, keywords TEXT, notes LONGTEXT, original_name VARCHAR(1024), stored_name VARCHAR(255), mime_type VARCHAR(255), file_size BIGINT, sha256 CHAR(64), created_by VARCHAR(190), created_at VARCHAR(32), updated_at VARCHAR(32), indexed_at TIMESTAMP DEFAU"
+    },
+    {
+      "line": 1932,
+      "method": "execute",
+      "sql": "CREATE TABLE IF NOT EXISTS archive_index_fields (document_id BIGINT NOT NULL, field_name VARCHAR(190) NOT NULL, field_value LONGTEXT, PRIMARY KEY(document_id,field_name), INDEX idx_archive_field_name(field_name), CONSTRAINT fk_archive_index_fields_document FOREIGN KEY(document_id) REFERENCES archive_index(document_id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",
+      "status": "translated_candidate",
+      "translated": "CREATE TABLE IF NOT EXISTS archive_index_fields (document_id BIGINT NOT NULL, field_name VARCHAR(190) NOT NULL, field_value LONGTEXT, PRIMARY KEY(document_id,field_name), INDEX idx_archive_field_name(field_name), CONSTRAINT fk_archive_index_fields_document FOREIGN KEY(document_id) REFERENCES archive_index(document_id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci"
+    },
+    {
+      "line": 1995,
+      "method": "execute",
+      "status": "dynamic_review_required",
+      "reason": "SQL expression is not a literal constant; inspect the constructed query at runtime",
+      "sql": "sql"
+    },
+    {
+      "line": 1997,
+      "method": "execute",
+      "sql": "SELECT i.id,i.original_name,b.name AS basket_name,i.status,i.mime_type FROM scan_inbox i JOIN scan_baskets b ON b.id=i.basket_id WHERE i.status!='archived' ORDER BY i.id DESC LIMIT 1000",
+      "status": "translated_candidate",
+      "translated": "SELECT i.id,i.original_name,b.name AS basket_name,i.status,i.mime_type FROM scan_inbox i JOIN scan_baskets b ON b.id=i.basket_id WHERE i.status!='archived' ORDER BY i.id DESC LIMIT 1000"
+    },
+    {
+      "line": 2054,
+      "method": "execute",
+      "sql": "INSERT INTO local_cases(case_number,title,case_type,status,priority,owner_department,assigned_to,due_date,notes,created_by) VALUES(?,?,?,?,?,?,?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_cases(case_number,title,case_type,status,priority,owner_department,assigned_to,due_date,notes,created_by) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    },
+    {
+      "line": 2055,
+      "method": "execute",
+      "sql": "INSERT INTO local_case_events(case_id,event_type,details,created_by) VALUES(?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_case_events(case_id,event_type,details,created_by) VALUES(%s,%s,%s,%s)"
+    },
+    {
+      "line": 2058,
+      "method": "execute",
+      "sql": "SELECT * FROM scan_inbox WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT * FROM scan_inbox WHERE id=%s"
+    },
+    {
+      "line": 2065,
+      "method": "execute",
+      "sql": "INSERT INTO local_case_attachments(case_id,original_name,stored_name,mime_type,file_size,notes,added_by) VALUES(?,?,?,?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_case_attachments(case_id,original_name,stored_name,mime_type,file_size,notes,added_by) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+    },
+    {
+      "line": 2067,
+      "method": "execute",
+      "sql": "INSERT INTO local_case_events(case_id,event_type,details,created_by) VALUES(?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_case_events(case_id,event_type,details,created_by) VALUES(%s,%s,%s,%s)"
+    },
+    {
+      "line": 2075,
+      "method": "execute",
+      "sql": "SELECT id,name FROM local_cabinets ORDER BY name",
+      "status": "translated_candidate",
+      "translated": "SELECT id,name FROM local_cabinets ORDER BY name"
+    },
+    {
+      "line": 2076,
+      "method": "execute",
+      "sql": "SELECT id,original_name,subject,document_number,document_date,created_at FROM local_documents ORDER BY id DESC LIMIT 12",
+      "status": "translated_candidate",
+      "translated": "SELECT id,original_name,subject,document_number,document_date,created_at FROM local_documents ORDER BY id DESC LIMIT 12"
+    },
+    {
+      "line": 2117,
+      "method": "execute",
+      "sql": "SELECT id FROM local_cabinets WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT id FROM local_cabinets WHERE id=%s"
+    },
+    {
+      "line": 2125,
+      "method": "execute",
+      "sql": "SELECT id FROM local_documents WHERE sha256=?",
+      "status": "translated_candidate",
+      "translated": "SELECT id FROM local_documents WHERE sha256=%s"
+    },
+    {
+      "line": 2133,
+      "method": "execute",
+      "sql": "INSERT INTO local_documents(cabinet_id,doc_type,document_number,document_date,subject,sender_recipient,employee_name,keywords,notes,original_name,stored_name,mime_type,file_size,sha256,created_by) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_documents(cabinet_id,doc_type,document_number,document_date,subject,sender_recipient,employee_name,keywords,notes,original_name,stored_name,mime_type,file_size,sha256,created_by) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    },
+    {
+      "line": 2136,
+      "method": "execute",
+      "sql": "SELECT id FROM local_documents WHERE stored_name=?",
+      "status": "translated_candidate",
+      "translated": "SELECT id FROM local_documents WHERE stored_name=%s"
+    },
+    {
+      "line": 2152,
+      "method": "execute",
+      "sql": "SELECT * FROM local_documents WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT * FROM local_documents WHERE id=%s"
+    },
+    {
+      "line": 2153,
+      "method": "execute",
+      "sql": "SELECT id,name FROM local_cabinets ORDER BY name",
+      "status": "translated_candidate",
+      "translated": "SELECT id,name FROM local_cabinets ORDER BY name"
+    },
+    {
+      "line": 2154,
+      "method": "execute",
+      "sql": "SELECT field_name,field_value FROM local_document_fields WHERE document_id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT field_name,field_value FROM local_document_fields WHERE document_id=%s"
+    },
+    {
+      "line": 2174,
+      "method": "execute",
+      "sql": "SELECT id FROM local_cabinets WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT id FROM local_cabinets WHERE id=%s"
+    },
+    {
+      "line": 2175,
+      "method": "execute",
+      "sql": "SELECT id FROM local_documents WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT id FROM local_documents WHERE id=%s"
+    },
+    {
+      "line": 2176,
+      "method": "execute",
+      "sql": "UPDATE local_documents SET cabinet_id=?,doc_type=?,document_number=?,document_date=?,subject=?,sender_recipient=?,employee_name=?,keywords=?,notes=?,updated_at=datetime('now') WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "UPDATE local_documents SET cabinet_id=%s,doc_type=%s,document_number=%s,document_date=%s,subject=%s,sender_recipient=%s,employee_name=%s,keywords=%s,notes=%s,updated_at=CURRENT_TIMESTAMP WHERE id=%s"
+    },
+    {
+      "line": 2180,
+      "method": "execute",
+      "sql": "DELETE FROM local_document_fields WHERE document_id=? AND field_name=?",
+      "status": "translated_candidate",
+      "translated": "DELETE FROM local_document_fields WHERE document_id=%s AND field_name=%s"
+    },
+    {
+      "line": 2181,
+      "method": "execute",
+      "sql": "INSERT INTO local_document_fields(document_id,field_name,field_value) VALUES(?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_document_fields(document_id,field_name,field_value) VALUES(%s,%s,%s)"
+    },
+    {
+      "line": 2283,
+      "method": "execute",
+      "sql": "SELECT c.*,COUNT(d.id) count FROM local_cabinets c LEFT JOIN local_documents d ON d.cabinet_id=c.id GROUP BY c.id ORDER BY c.name",
+      "status": "translated_candidate",
+      "translated": "SELECT c.*,COUNT(d.id) count FROM local_cabinets c LEFT JOIN local_documents d ON d.cabinet_id=c.id GROUP BY c.id ORDER BY c.name"
+    },
+    {
+      "line": 2295,
+      "method": "execute",
+      "sql": "INSERT INTO local_cabinets(name,description) VALUES(?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_cabinets(name,description) VALUES(%s,%s)"
+    },
+    {
+      "line": 2306,
+      "method": "execute",
+      "sql": "UPDATE local_users SET password_salt=?,password_hash=? WHERE username=?",
+      "status": "translated_candidate",
+      "translated": "UPDATE local_users SET password_salt=%s,password_hash=%s WHERE username=%s"
+    },
+    {
+      "line": 2324,
+      "method": "execute",
+      "sql": "SELECT id,stored_name,original_name,sha256 FROM local_documents WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "SELECT id,stored_name,original_name,sha256 FROM local_documents WHERE id=%s"
+    },
+    {
+      "line": 2330,
+      "method": "execute",
+      "sql": "UPDATE scan_inbox SET status=CASE WHEN extracted_text IS NOT NULL AND TRIM(extracted_text)!='' THEN 'needs_review' ELSE 'received' END WHERE sha256=? AND status='archived'",
+      "status": "translated_candidate",
+      "translated": "UPDATE scan_inbox SET status=CASE WHEN extracted_text IS NOT NULL AND TRIM(extracted_text)!='' THEN 'needs_review' ELSE 'received' END WHERE sha256=%s AND status='archived'"
+    },
+    {
+      "line": 2334,
+      "method": "execute",
+      "sql": "DELETE FROM local_documents WHERE id=?",
+      "status": "translated_candidate",
+      "translated": "DELETE FROM local_documents WHERE id=%s"
+    },
+    {
+      "line": 2335,
+      "method": "execute",
+      "sql": "INSERT INTO local_audit(username,action,document_id,details) VALUES(?,?,?,?)",
+      "status": "translated_candidate",
+      "translated": "INSERT INTO local_audit(username,action,document_id,details) VALUES(%s,%s,%s,%s)"
+    },
+    {
+      "line": 2337,
+      "method": "execute",
+      "sql": "SELECT 1 FROM local_documents WHERE stored_name=? UNION ALL SELECT 1 FROM scan_inbox WHERE stored_name=? UNION ALL SELECT 1 FROM local_case_attachments WHERE stored_name=? LIMIT 1",
+      "status": "translated_candidate",
+      "translated": "SELECT 1 FROM local_documents WHERE stored_name=%s UNION ALL SELECT 1 FROM scan_inbox WHERE stored_name=%s UNION ALL SELECT 1 FROM local_case_attachments WHERE stored_name=%s LIMIT 1"
+    }
+  ]
+}

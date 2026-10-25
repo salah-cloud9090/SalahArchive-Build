@@ -1,0 +1,32 @@
+{
+  "release": "Salah Archive v15.80 — Local and Server Profile Preflight",
+  "unit_tests": {
+    "returncode": 0,
+    "summary": [
+      "Ran 148 tests in 0.415s",
+      "",
+      "OK"
+    ]
+  },
+  "compileall_passed": true,
+  "strict_compile_returncode": 0,
+  "features": [
+    "local MySQL profile on 127.0.0.1:3306",
+    "server MySQL profile on configured LAN hostname/IP:3306",
+    "password from SALAH_MYSQL_PASSWORD only",
+    "pre-production database guard salah_archive_test"
+  ],
+  "safety": {
+    "opened_original_database": false,
+    "modified_main_py": false,
+    "contacted_mysql_server": false,
+    "executed_ddl": false,
+    "production_database_allowed": false
+  },
+  "deployment_ready": false,
+  "blockers": [
+    "MySQL connection and CRUD tests must run on the user Windows host; this build environment cannot access the installed MySQL service.",
+    "The server profile must be configured with the actual internal server address.",
+    "The main.py production entry point remains SQLite-based; MySQL mode is still a separate candidate."
+  ]
+}

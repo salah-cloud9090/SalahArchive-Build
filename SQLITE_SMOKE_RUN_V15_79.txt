@@ -1,0 +1,5 @@
+PASS: isolated SQLite initialization
+PASS: 5 default cabinets found
+PASS: document insert / select / update / delete
+PASS: disposable database created 13 tables
+SAFE: temporary directory is deleted automatically; no user DB is opened

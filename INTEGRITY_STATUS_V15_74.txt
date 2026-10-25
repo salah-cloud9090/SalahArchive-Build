@@ -1,0 +1,4 @@
+Original signed-file integrity check: PASS
+Detail: OK
+
+The original main.py and other manifest-listed files were left unchanged. New MySQL candidate files are not covered by the original signature. The proposed main.py patch is unsigned and must not be applied to the signed runtime until the authorized release signer reviews and re-signs it.

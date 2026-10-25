@@ -1,0 +1,52 @@
+{
+  "package": "Salah Archive v15.79 Warning Cleanup and Integration Preflight",
+  "checks": {
+    "unit_tests": {
+      "returncode": 0,
+      "passed": true
+    },
+    "python_compile": {
+      "passed": true
+    },
+    "mysql_candidate_strict_compile": {
+      "returncode": 0,
+      "passed": true,
+      "output": ""
+    },
+    "static_audits": {
+      "mysql_migration_gate.py": {
+        "returncode": 0,
+        "passed": true,
+        "output": "<unknown>:1041: SyntaxWarning: invalid escape sequence '\\s'\n{\n  \"status\": \"BLOCKED\",\n  \"sqlite_schema_tables\": 16,\n  \"mysql_candidate_tables\": 16,\n  \"missing_tables\": [],\n  \"missing_columns\": {},\n  \"marker_line_count\": 53\n}\n"
+      },
+      "mysql_pre_final_audit.py": {
+        "returncode": 0,
+        "passed": true,
+        "output": "<unknown>:1041: SyntaxWarning: invalid escape sequence '\\s'\n{\n  \"status\": \"BLOCKED\",\n  \"blockers\": [\n    \"runtime_sqlite_connect\",\n    \"runtime_executescript\",\n    \"runtime_pragma\",\n    \"runtime_sqlite_datetime\",\n    \"dynamic_table_ddl\",\n    \"direct_connection_contexts\",\n    \"main.py is not wired to MySQLRepository\"\n  ],\n  \"adapter_api_coverage\": {\n    \"context_manager\": true,\n    \"commit\": true,\n    \"rollback\": true,\n    \"executescript_fails_closed\": true\n  }\n}\n"
+      },
+      "mysql_query_compat_audit.py": {
+        "returncode": 0,
+        "passed": true,
+        "output": "<unknown>:1041: SyntaxWarning: invalid escape sequence '\\s'\n{\n  \"statement_count\": 166,\n  \"status_counts\": {\n    \"blocked\": 9,\n    \"translated_candidate\": 153,\n    \"dynamic_review_required\": 4\n  },\n  \"blocked_count\": 9\n}\n"
+      },
+      "mysql_candidate_gate.py": {
+        "returncode": 0,
+        "passed": true,
+        "output": "Salah Archive — MySQL Candidate Static Gate\n===========================================\n\nStatus: PASS_STATIC_CANDIDATE\n\nPASS — candidate_present\nPASS — opt_in_backend_flag\nPASS — reviewed_schema_bootstrap\nPASS — foreign_key_preflight\nPASS — test_db_ui_locked\nPASS — password_not_form_persisted\nPASS — sqlite_setup_guarded\nPASS — known_replace_statement_reviewed\nPASS — mysql_sync_not_run_on_archive_crud\nPASS — original_sqlite_source_retained\nPASS — not_claimed_live_tested\n\nLimitations:\n- No MySQL server connection was attempted.\n- No real archive CRUD, scanner, attachment, or AI workflow was executed.\n- Candidate remains unsigned and is not installed over main.py.\n"
+      }
+    },
+    "deployment_ready": {
+      "passed": false,
+      "reason": "The production main.py remains SQLite-based; the MySQL candidate is unsigned and live CRUD/attachment verification has not been performed."
+    }
+  },
+  "safety": {
+    "opened_original_database": false,
+    "executed_ddl": false,
+    "contacted_mysql": false,
+    "modified_main_py": false
+  },
+  "migration_gate": "BLOCKED",
+  "integration_gate": "BLOCKED",
+  "candidate_static_gate": "PASS_STATIC_CANDIDATE"
+}

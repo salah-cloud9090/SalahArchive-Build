@@ -1,0 +1,10 @@
+PASS test_exact_test_database_confirmation
+PASS test_original_and_other_databases_blocked
+PASS test_backup_preserves_committed_rows
+PASS test_existing_backup_not_overwritten
+PASS test_migration_helper_has_no_drop_table
+PASS test_schema_preview_on_sample_database
+PASS test_preflight_detects_partial_indexes
+PASS test_preflight_detects_text_indexes
+PASS test_dry_run_cli_does_not_require_mysql_or_write_target
+9/9 tests passed; no MySQL connection made.

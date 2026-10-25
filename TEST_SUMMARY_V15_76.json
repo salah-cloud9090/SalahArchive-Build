@@ -1,0 +1,12 @@
+{
+  "version": "15.76",
+  "tests": 124,
+  "test_suite_passed": true,
+  "python_files_compiled": 55,
+  "compile_errors": 0,
+  "isolated_sqlite_smoke_passed": true,
+  "live_mysql_connection_attempted": false,
+  "production_database_opened": false,
+  "candidate_sha256": "819a4915d430e1f7b1aa1a5e6c2bc1b7a5cc208eddfb677350ca216dfe11a2ac",
+  "original_main_sha256": "8848820aac23116e1a5b5022ddd0f5bfe5d96e8c4f9a73827a2b902290487f29"
+}

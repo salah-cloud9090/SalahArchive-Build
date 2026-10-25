@@ -1,0 +1,22 @@
+{
+  "status": "PASS_STATIC_CANDIDATE",
+  "checks": {
+    "candidate_present": true,
+    "opt_in_backend_flag": true,
+    "reviewed_schema_bootstrap": true,
+    "foreign_key_preflight": true,
+    "test_db_ui_locked": true,
+    "password_not_form_persisted": true,
+    "sqlite_setup_guarded": true,
+    "known_replace_statement_reviewed": true,
+    "mysql_sync_not_run_on_archive_crud": true,
+    "original_sqlite_source_retained": true,
+    "not_claimed_live_tested": true
+  },
+  "blockers": [],
+  "limitations": [
+    "No MySQL server connection was attempted.",
+    "No real archive CRUD, scanner, attachment, or AI workflow was executed.",
+    "Candidate remains unsigned and is not installed over main.py."
+  ]
+}

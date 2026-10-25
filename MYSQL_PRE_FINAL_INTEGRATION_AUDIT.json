@@ -1,0 +1,34 @@
+{
+  "status": "BLOCKED",
+  "scope": "Static-only pre-final integration audit; no database opened and no network connection attempted.",
+  "main_db_function_found": true,
+  "runtime_markers": {
+    "runtime_sqlite_connect": true,
+    "runtime_executescript": true,
+    "runtime_pragma": true,
+    "runtime_sqlite_datetime": true,
+    "dynamic_table_ddl": true,
+    "direct_connection_contexts": true
+  },
+  "adapter_api_coverage": {
+    "context_manager": true,
+    "commit": true,
+    "rollback": true,
+    "executescript_fails_closed": true
+  },
+  "blockers": [
+    "runtime_sqlite_connect",
+    "runtime_executescript",
+    "runtime_pragma",
+    "runtime_sqlite_datetime",
+    "dynamic_table_ddl",
+    "direct_connection_contexts",
+    "main.py is not wired to MySQLRepository"
+  ],
+  "safe_next_step": "Refactor database initialization and all SQLite-only setup behind a separately tested MySQL bootstrap; then run CRUD and attachment integration tests against salah_archive_test only.",
+  "safety": {
+    "original_database_opened": false,
+    "ddl_executed": false,
+    "mysql_contacted": false
+  }
+}

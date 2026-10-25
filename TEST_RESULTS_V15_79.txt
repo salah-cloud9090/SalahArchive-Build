@@ -1,0 +1,38 @@
+Salah Archive v15.79 — Test Results
+===================================
+
+Unit tests: PASS
+Total: 138 tests
+Failures: 0
+Errors: 0
+
+SQLite isolated smoke test: PASS
+- Initialized a temporary database in a disposable temp directory.
+- Found 5 default cabinets.
+- Inserted, selected, updated, and deleted a test document.
+- Created 13 tables in the disposable database.
+- Temporary directory was automatically removed.
+
+Strict SyntaxWarning checks: PASS
+- main_mysql_candidate.py
+- main_mysql_candidate_v15_76.py
+- main_mysql_candidate_v15_79.py
+
+Original source integrity: PASS
+- main.py SHA-256 matches integrity_manifest.json.
+- Original main.py was restored byte-for-byte after candidate cleanup.
+
+Static deployment preflight:
+- Unit tests: PASS
+- Python compile: PASS
+- MySQL candidate strict compile: PASS
+- Candidate static gate: PASS_STATIC_CANDIDATE
+- Migration gate: BLOCKED
+- Integration gate: BLOCKED
+- Deployment ready: NO
+
+Limitations:
+- No live MySQL server was contacted.
+- No MySQL DDL or production migration was executed.
+- No real scanner, AI, or attachment workflow was run against MySQL.
+- Production database salah_archive was not opened or modified.

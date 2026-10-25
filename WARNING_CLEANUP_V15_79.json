@@ -1,0 +1,28 @@
+{
+  "version": "15.79",
+  "status": "PASS_CANDIDATE_WARNING_CLEANUP",
+  "issue": "Invalid escape sequences in JavaScript regex embedded inside Python string literals",
+  "fixed_files": [
+    "main_mysql_candidate.py",
+    "main_mysql_candidate_v15_76.py",
+    "main_mysql_candidate_v15_79.py"
+  ],
+  "validation": {
+    "strict_syntaxwarning_compile": "PASS",
+    "runtime_javascript_regex_backslashes": "PASS",
+    "unit_tests": 138,
+    "unit_test_failures": 0,
+    "isolated_sqlite_smoke_test": "PASS",
+    "original_main_sha256_matches_manifest": true
+  },
+  "safety": {
+    "original_main_modified": false,
+    "production_database_opened": false,
+    "mysql_server_contacted": false,
+    "ddl_executed": false
+  },
+  "limitations": [
+    "The signed original main.py still contains the legacy invalid-escape warning; it was preserved byte-for-byte to avoid invalidating the manifest. The unsigned MySQL candidates have the fix.",
+    "MySQL runtime integration remains blocked until live test-database verification is available."
+  ]
+}

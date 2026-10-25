@@ -1,0 +1,9 @@
+{
+  "test_count": 118,
+  "duration_seconds": 0.257,
+  "passed": true,
+  "test_command": "python -m unittest discover -p test_*.py -v",
+  "python_compile_passed": true,
+  "mysql_live_connection_attempted": false,
+  "production_database_opened": false
+}

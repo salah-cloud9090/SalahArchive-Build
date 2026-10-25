@@ -1,0 +1,12 @@
+usage: main_mysql_candidate_v15_81.py [-h] [--network] [--no-gui]
+                                      [--port PORT]
+
+Directorate of Nationality and Civil Information — local administrative
+archive.
+
+options:
+  -h, --help   show this help message and exit
+  --network    Bind web interface to all interfaces for trusted LAN/VPN use.
+               Not HTTPS.
+  --no-gui     Run web service without desktop window.
+  --port PORT

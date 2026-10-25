@@ -1,0 +1,13 @@
+{
+  "version": "15.77",
+  "status": "PASS_STATIC",
+  "tables_checked": 16,
+  "indexes_checked": 40,
+  "errors": [],
+  "limitations": [
+    "Static parsing only; no MySQL server connection was made.",
+    "Existing database indexes are checked at runtime by ensure_schema before CREATE TABLE statements.",
+    "Foreign-key definitions and server collation/version compatibility require separate live validation.",
+    "The production database salah_archive was not accessed or modified."
+  ]
+}
