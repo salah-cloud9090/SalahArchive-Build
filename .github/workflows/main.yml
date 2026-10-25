@@ -2,6 +2,8 @@ name: Salah Archive Windows Build
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
 
 permissions:
   contents: read
