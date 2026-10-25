@@ -1,0 +1,36 @@
+# Python temporary files
+__pycache__/
+*.py[cod]
+*.pyd
+
+# Build outputs
+build/
+dist/
+*.spec
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Test and log artifacts
+.pytest_cache/
+*.log
+
+# Local databases and backups
+*.db
+*.sqlite
+*.sqlite3
+*.bak
+
+# Secrets and private signing keys
+.env
+.env.*
+*PRIVATE_KEY*
+*private_key*
+*SIGNING_PRIVATE*
+*signing_private*
+
+# Editor files
+.vscode/
+.idea/
